@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ServaSetu - Home Services Platform
 
-## Getting Started
+A modern, responsive home services booking platform built with Next.js 16 and Tailwind CSS 4.
 
-First, run the development server:
+## 🚀 Project Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+ServaSetu is a professional home services platform that allows users to:
+- Browse various home services (Plumbing, Electrical, AC Repair, Cleaning, etc.)
+- Book services with a step-by-step flow
+- Schedule appointments with date and time selection
+- Select payment methods and complete checkout
+- View AMC subscription plans
+
+## 📁 Project Structure
+
+```
+frontend/
+├── app/
+│   ├── page.tsx                    # Landing page with services and AMC plans
+│   ├── booking/
+│   │   └── page.tsx               # Service selection page
+│   ├── checkout/
+│   │   └── page.tsx               # Scheduling and payment page
+│   ├── layout.tsx                 # Root layout with Inter font
+│   └── globals.css                # Global styles with custom Tailwind theme
+├── components/
+│   ├── Navbar.tsx                 # Reusable navigation component
+│   └── Footer.tsx                 # Reusable footer component
+└── package.json                   # Dependencies
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎨 Design System
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Color Palette
+- **Primary Blue**: `#1F4E8C` - Main brand color
+- **Accent Teal**: `#1FA37A` - Secondary brand color
+- **Saffron**: `#FF9933` - Highlight/accent color
+- **Background Light**: `#F8FAFC` - Light background
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Typography
+- **Font Family**: Inter (Google Fonts)
+- **Weights**: 300, 400, 500, 600, 700, 800, 900
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework**: Next.js 16.1.6 (App Router)
+- **React**: 19.2.3
+- **Styling**: Tailwind CSS 4.0
+- **Language**: TypeScript 5
+- **Icons**: Material Symbols Outlined
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Getting Started
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Run the development server**:
+```bash
+npm run dev
+```
 
-## Deploy on Vercel
+2. **Open your browser**:
+Navigate to `http://localhost:3000`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 Pages Overview
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 1. Landing Page (`/`)
+- Hero section with search functionality
+- 8 service categories with hover effects
+- "Why Choose Us" section with testimonials
+- AMC subscription plans (Essential, Premium, Elite)
+
+### 2. Booking Page (`/booking`)
+- Service selection for plumbing tasks
+- Interactive service cards with real-time price calculation
+- 4 service options: Tap Repair ($29), Pipe Leakage ($49), Full Checkup ($99), Geyser Service ($35)
+
+### 3. Checkout Page (`/checkout`)
+- Date selection with calendar interface
+- Time slot selection
+- Payment method options (UPI, Cards, Net Banking)
+- Order summary with pricing breakdown
+
+## 🎯 Features Implemented
+
+✅ Fully responsive design for mobile, tablet, and desktop
+✅ Modern UI with smooth animations and transitions
+✅ Interactive components (service selection, date picker, payment options)
+✅ Client-side state management with React hooks
+✅ SEO-optimized with proper meta tags
+✅ Material Icons integration
+✅ Gradient effects and micro-interactions
+
+## 🔧 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm start` - Start production server
+- `npm run lint` - Run ESLint
+
+## 🌐 Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new).
+
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+---
+
+**Built with ❤️ using Next.js and Tailwind CSS**
