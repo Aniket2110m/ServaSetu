@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ServaSetu - Refined Booking Flow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#008080", // Teal
+                        "primary-dark": "#006666",
+                        "serva-blue": "#0A192F", // Dark blue for footer
+                        "bg-light": "#F5F7FA",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                        "display": ["Poppins", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "16px",
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body { 
+                @apply bg-bg-light font-sans text-slate-800;
+            }
+            .text-justify {
+                text-align: justify;
+                text-justify: inter-word;
+            }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-slate-200 bg-white/90 backdrop-blur-md px-6 md:px-20 py-4">
+<div class="flex items-center gap-12">
+<div class="flex items-center gap-2">
+<div class="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined text-2xl">handyman</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight font-display text-serva-blue">ServaSetu</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#">Services</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#">Bookings</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#">Support</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="h-10 w-10 rounded-full bg-slate-100 overflow-hidden border-2 border-primary/20">
+<img alt="Profile" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGnpbpGwwsJBBOkm_qsd3AQGNtMw1BeI7Jx0qjr16uxleX9UZHAn1C82hFvfTO_WVDn7o7UuNdAKzVcmipPl32ZUk_mw-DfuUBk1CmOxNm-6ePANH5j_-ooAeKHGnZsUIhDiiGnNC5TuTwhFdke--2oO9Xts5W46QeCh2kIMPyYo3GR4JyDjAodmFtNo7gWVXN7ezwSa0fWbQv3RahEmevZldKJk7Qi_gkVpzlSx0RdsuwIuzPhb0JcbohZxnL1FAIo18uHCg5mWwA"/>
+</div>
+<button class="flex h-10 items-center justify-center rounded-xl bg-serva-blue px-6 text-sm font-bold text-white shadow-lg hover:bg-slate-800 transition-all">
+                Sign In
+            </button>
+</div>
+</header>
+<main class="mx-auto flex w-full max-w-[1280px] flex-col px-6 py-12 md:px-20 flex-grow">
+<div class="mb-12 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold font-display text-serva-blue">Service Selection</h3>
+<span class="text-sm font-bold text-primary">25% Complete</span>
+</div>
+<div class="relative h-2 w-full rounded-full bg-slate-200">
+<div class="absolute h-full rounded-full bg-gradient-to-r from-primary to-primary-dark" style="width: 25%;"></div>
+</div>
+<div class="grid grid-cols-4 w-full text-[11px] font-bold uppercase tracking-wider text-slate-400">
+<div class="text-primary text-justify">1. Select Service</div>
+<div class="text-justify px-4">2. Schedule</div>
+<div class="text-justify px-4">3. Address</div>
+<div class="text-justify text-right">4. Payment</div>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
+<div class="lg:col-span-2 flex flex-col gap-8">
+<div class="mb-2">
+<h1 class="text-4xl font-bold tracking-tight text-serva-blue font-display mb-3">Plumbing Tasks</h1>
+<p class="text-slate-500 text-justify leading-relaxed max-w-2xl">
+                        Select the specific plumbing service you require. Our certified professionals are equipped with high-grade tools to ensure premium quality work and long-lasting results for your home maintenance needs.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="relative flex flex-col gap-6 rounded-2xl border-2 border-primary bg-white p-8 shadow-sm ring-4 ring-primary/5 transition-all">
+<div class="absolute right-4 top-4 text-primary">
+<span class="material-symbols-outlined fill-1 text-2xl">check_circle</span>
+</div>
+<div class="flex flex-col items-center justify-center">
+<div class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
+<span class="material-symbols-outlined text-4xl">water_damage</span>
+</div>
+<h4 class="text-xl font-bold text-serva-blue">Tap Repair</h4>
+</div>
+<p class="text-sm text-slate-500 leading-relaxed text-justify">
+                            Expert fixing of leaks, drips, and faulty handles. Our service includes comprehensive washer replacement and O-ring checkups to prevent water wastage and ensure your fixtures operate smoothly.
+                        </p>
+<div class="mt-auto pt-4 flex items-center justify-between">
+<span class="text-xl font-bold text-primary">$29.00</span>
+<span class="text-[10px] font-black uppercase tracking-widest text-primary bg-primary/5 px-3 py-1 rounded-full">Active Selection</span>
+</div>
+</div>
+<div class="group flex flex-col gap-6 rounded-2xl border-2 border-transparent bg-white p-8 shadow-sm transition-all hover:border-primary/20 hover:shadow-xl cursor-pointer">
+<div class="flex flex-col items-center justify-center">
+<div class="flex h-16 w-16 items-center justify-center rounded-full bg-slate-50 text-slate-400 group-hover:bg-primary/5 group-hover:text-primary transition-colors mb-4">
+<span class="material-symbols-outlined text-4xl">plumbing</span>
+</div>
+<h4 class="text-xl font-bold text-serva-blue">Pipe Leakage</h4>
+</div>
+<p class="text-sm text-slate-500 leading-relaxed text-justify">
+                            Comprehensive repair for cracked, corroded, or burst pipes. We utilize high-grade sealing technology and professional-grade materials to ensure long-term durability and structural integrity of your plumbing.
+                        </p>
+<div class="mt-auto pt-4 flex items-center justify-between">
+<span class="text-xl font-bold text-slate-800">$49.00</span>
+<button class="text-xs font-bold uppercase tracking-widest text-primary hover:text-primary-dark transition-colors">Select Service</button>
+</div>
+</div>
+<div class="group flex flex-col gap-6 rounded-2xl border-2 border-transparent bg-white p-8 shadow-sm transition-all hover:border-primary/20 hover:shadow-xl cursor-pointer">
+<div class="flex flex-col items-center justify-center">
+<div class="flex h-16 w-16 items-center justify-center rounded-full bg-slate-50 text-slate-400 group-hover:bg-primary/5 group-hover:text-primary transition-colors mb-4">
+<span class="material-symbols-outlined text-4xl">health_and_safety</span>
+</div>
+<h4 class="text-xl font-bold text-serva-blue">Full Checkup</h4>
+</div>
+<p class="text-sm text-slate-500 leading-relaxed text-justify">
+                            A total system diagnosis of your home's water supply and drainage infrastructure. This includes pressure testing, identification of potential future risks, and a detailed health report of all systems.
+                        </p>
+<div class="mt-auto pt-4 flex items-center justify-between">
+<span class="text-xl font-bold text-slate-800">$99.00</span>
+<button class="text-xs font-bold uppercase tracking-widest text-primary hover:text-primary-dark transition-colors">Select Service</button>
+</div>
+</div>
+<div class="group flex flex-col gap-6 rounded-2xl border-2 border-transparent bg-white p-8 shadow-sm transition-all hover:border-primary/20 hover:shadow-xl cursor-pointer">
+<div class="flex flex-col items-center justify-center">
+<div class="flex h-16 w-16 items-center justify-center rounded-full bg-slate-50 text-slate-400 group-hover:bg-primary/5 group-hover:text-primary transition-colors mb-4">
+<span class="material-symbols-outlined text-4xl">ev_station</span>
+</div>
+<h4 class="text-xl font-bold text-serva-blue">Geyser Service</h4>
+</div>
+<p class="text-sm text-slate-500 leading-relaxed text-justify">
+                            Deep cleaning of heating elements and safety valve inspection. Recommended annually to ensure efficient energy consumption, consistent water temperature, and overall household safety.
+                        </p>
+<div class="mt-auto pt-4 flex items-center justify-between">
+<span class="text-xl font-bold text-slate-800">$35.00</span>
+<button class="text-xs font-bold uppercase tracking-widest text-primary hover:text-primary-dark transition-colors">Select Service</button>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-1">
+<div class="sticky top-28 flex flex-col gap-8 rounded-2xl bg-white p-8 shadow-2xl border border-slate-100">
+<div>
+<p class="text-[10px] font-black uppercase tracking-[0.2em] text-primary mb-1">Booking Overview</p>
+<h2 class="text-2xl font-bold text-serva-blue font-display">Summary</h2>
+</div>
+<div class="space-y-5">
+<div class="flex items-center justify-between pb-4 border-b border-slate-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 text-xl">label</span>
+<span class="text-sm font-semibold text-slate-600">Selected Service</span>
+</div>
+<span class="text-sm font-bold text-serva-blue">Tap Repair</span>
+</div>
+<div class="flex items-center justify-between pb-4 border-b border-slate-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 text-xl">calendar_today</span>
+<span class="text-sm font-semibold text-slate-600">Schedule</span>
+</div>
+<span class="text-xs font-medium text-slate-400 italic">Next step...</span>
+</div>
+<div class="flex items-center justify-between pb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 text-xl">verified</span>
+<span class="text-sm font-semibold text-slate-600">Visiting Fee</span>
+</div>
+<span class="text-sm font-bold text-primary">Waived</span>
+</div>
+</div>
+<div class="flex flex-col gap-4 rounded-xl bg-bg-light p-6">
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold text-slate-500 uppercase tracking-wider">Estimated Total</span>
+<span class="text-3xl font-black text-serva-blue">$29.00</span>
+</div>
+<p class="text-[10px] text-slate-400 text-justify leading-tight">
+                            *This estimate includes labor for standard repair. Final pricing may be adjusted based on the specific spare parts required during the actual service visit.
+                        </p>
+</div>
+<button class="w-full rounded-xl bg-gradient-to-r from-primary to-primary-dark py-4 text-center text-sm font-bold text-white shadow-lg shadow-primary/20 hover:brightness-105 transition-all transform active:scale-[0.98]">
+                        Confirm &amp; Continue
+                    </button>
+<div class="flex items-center justify-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-lg">security</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Premium Secure Booking</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-20 bg-serva-blue text-white px-6 py-16 md:px-20">
+<div class="mx-auto grid max-w-[1280px] grid-cols-2 gap-12 md:grid-cols-4">
+<div class="col-span-2 md:col-span-1">
+<div class="flex items-center gap-2 mb-8">
+<div class="h-8 w-8 rounded bg-primary text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">handyman</span>
+</div>
+<span class="font-bold text-xl tracking-tight font-display">ServaSetu</span>
+</div>
+<p class="text-sm text-slate-400 leading-relaxed text-justify mb-6">
+                    Redefining home maintenance through professional, reliable, and premium service delivery. We bridge the gap between skilled experts and homeowners who value excellence.
+                </p>
+<div class="flex gap-4">
+<div class="h-8 w-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-sm">share</span>
+</div>
+<div class="h-8 w-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-sm">hub</span>
+</div>
+</div>
+</div>
+<div class="pl-0 md:pl-10">
+<h5 class="mb-6 font-bold text-sm uppercase tracking-widest text-primary">Company</h5>
+<ul class="space-y-4 text-sm text-slate-400">
+<li><a class="hover:text-white transition-colors" href="#">Our Mission</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Service Areas</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Partner with Us</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Contact Center</a></li>
+</ul>
+</div>
+<div>
+<h5 class="mb-6 font-bold text-sm uppercase tracking-widest text-primary">Expertise</h5>
+<ul class="space-y-4 text-sm text-slate-400">
+<li><a class="hover:text-white transition-colors" href="#">Plumbing Solutions</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Electrical Engineering</a></li>
+<li><a class="hover:text-white transition-colors" href="#">HVAC Maintenance</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Home Sanitization</a></li>
+</ul>
+</div>
+<div>
+<h5 class="mb-6 font-bold text-sm uppercase tracking-widest text-primary">Support</h5>
+<ul class="space-y-4 text-sm text-slate-400">
+<li><a class="hover:text-white transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Privacy Guidelines</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Refund Policy</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Safety Protocols</a></li>
+</ul>
+</div>
+</div>
+<div class="mx-auto mt-20 max-w-[1280px] border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest text-justify">
+                © 2024 ServaSetu Home Solutions Private Limited. Excellence in every service visit.
+            </p>
+<div class="flex gap-8 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+<a class="hover:text-primary transition-colors" href="#">Facebook</a>
+<a class="hover:text-primary transition-colors" href="#">Twitter</a>
+<a class="hover:text-primary transition-colors" href="#">Instagram</a>
+</div>
+</div>
+</footer>
+
+</body></html>

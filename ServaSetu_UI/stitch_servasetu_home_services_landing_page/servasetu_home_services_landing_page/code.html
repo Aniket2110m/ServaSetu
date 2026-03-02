@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ServaSetu | Professional Home Services, Simplified</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary-blue: #1F4E8C;
+            --accent-teal: #1FA37A;
+            --saffron: #FF9933;
+            --bg-light: #F8FAFC;
+        }
+        @layer utilities {
+            .bg-brand-gradient {
+                background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-teal) 100%);
+            }
+            .text-brand-gradient {
+                background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-teal) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .text-justify-safe {
+                text-align: justify;
+                text-justify: inter-word;
+            }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1F4E8C",
+                        "secondary": "#1FA37A",
+                        "accent": "#FF9933",
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#0F172A",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 overflow-x-hidden">
+<nav class="sticky top-0 z-50 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="relative">
+<span class="material-symbols-outlined text-primary text-3xl">home_repair_service</span>
+<div class="absolute -top-1 -right-1 size-2.5 bg-[var(--saffron)] rounded-full border-2 border-white dark:border-slate-900"></div>
+</div>
+<span class="text-2xl font-extrabold tracking-tight text-primary">ServaSetu</span>
+</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-sm font-semibold text-primary/80 hover:text-primary transition-colors" href="#">Services</a>
+<a class="text-sm font-semibold text-primary/80 hover:text-primary transition-colors" href="#">AMC Plans</a>
+<a class="text-sm font-semibold text-primary/80 hover:text-primary transition-colors" href="#">Why Choose Us</a>
+<a class="text-sm font-semibold text-primary/80 hover:text-primary transition-colors" href="#">Reviews</a>
+</div>
+<button class="bg-brand-gradient text-white px-7 py-2.5 rounded-full font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-primary/20">
+            Book a Service
+        </button>
+</div>
+</nav>
+<header class="relative pt-16 pb-24 overflow-hidden">
+<div class="max-w-[1200px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="flex flex-col gap-8">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/5 border border-primary/10 text-primary text-xs font-bold uppercase tracking-wider w-fit">
+<span class="material-symbols-outlined text-sm text-[var(--saffron)]">verified</span>
+                Trusted by 10,000+ Households
+            </div>
+<h1 class="text-5xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight text-primary text-justify-safe">
+                Professional Home Services, <span class="text-brand-gradient">Simplified</span>
+</h1>
+<p class="text-lg text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed text-justify-safe">
+                Experience premium home maintenance with our certified experts. From plumbing to full home AMC plans, we ensure your peace of mind with a nation-first commitment.
+            </p>
+<div class="relative group max-w-xl">
+<div class="flex items-center bg-white dark:bg-slate-800 p-2 rounded-2xl shadow-2xl shadow-primary/10 border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary/40 px-4">search</span>
+<input class="flex-1 border-none focus:ring-0 bg-transparent text-slate-900 dark:text-white placeholder:text-slate-400" placeholder="Search for a service (e.g. Electrical)" type="text"/>
+<button class="bg-primary text-white px-8 py-3.5 rounded-xl font-bold hover:bg-primary/90 transition-all">
+                        Find Now
+                    </button>
+</div>
+</div>
+</div>
+<div class="relative flex justify-center lg:justify-end">
+<div class="w-full max-w-[520px] aspect-square bg-gradient-to-br from-primary/5 via-secondary/10 to-transparent rounded-[3rem] flex items-center justify-center relative rotate-3">
+<div class="absolute inset-0 bg-white/40 dark:bg-slate-800/20 backdrop-blur-xl rounded-[3rem] -rotate-6 border border-white/50"></div>
+<img alt="Professional technician with tools" class="relative z-10 w-full h-auto drop-shadow-2xl -rotate-3 hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkOHgOc9dBd7Y1ue9Cp2zXtOKlhcw5DaTzrC2s30nPab3GHRRQJfdecdqOgr1zXTvxL6rZNbnzP6s8FONvIC3zCLRfogAlU8DIVM2ClpI22zG4BnUsDh4d2TNucuD22SPfmzQbJrr2PiaFWRe-_W_SFOtu4gFvBwvDcOcDwxE_LmPD9FljwLlSWMijmLqBzVrFG9R3UtHc8X76l65VdTn1lRKZbcKnSWcOtlx2pWaIXyBDOxmhFJhaM0OZPfdrk90NAIILSbcgJamb"/>
+<div class="absolute bottom-10 left-10 size-12 bg-[var(--saffron)] rounded-2xl rotate-12 opacity-20 blur-xl"></div>
+</div>
+</div>
+</div>
+</header>
+<section class="py-24 bg-white dark:bg-slate-900/50">
+<div class="max-w-[1200px] mx-auto px-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+<div class="flex flex-col gap-3">
+<h2 class="text-4xl font-extrabold text-primary text-justify-safe">Our Services</h2>
+<div class="h-1.5 w-20 bg-[var(--saffron)] rounded-full"></div>
+<p class="text-slate-500 mt-2 text-justify-safe">Professional solutions for every corner of your home</p>
+</div>
+<a class="text-secondary font-bold flex items-center gap-2 hover:gap-4 transition-all" href="#">
+                View all services <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="group cursor-pointer bg-slate-50 dark:bg-slate-800/40 p-8 rounded-2xl border border-slate-100 dark:border-slate-700 hover:border-secondary/40 transition-all hover:shadow-2xl hover:shadow-secondary/10 hover:-translate-y-2 flex flex-col items-center">
+<div class="size-16 rounded-xl bg-white dark:bg-slate-700 flex items-center justify-center text-primary mb-6 shadow-sm group-hover:bg-brand-gradient group-hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined text-3xl">plumbing</span>
+</div>
+<h3 class="font-bold text-xl mb-2 text-primary w-full text-justify-safe">Plumbing</h3>
+<p class="text-sm text-slate-500 leading-relaxed w-full text-justify-safe">Expert leak fixes &amp; installations</p>
+</div>
+<div class="group cursor-pointer bg-slate-50 dark:bg-slate-800/40 p-8 rounded-2xl border border-slate-100 dark:border-slate-700 hover:border-secondary/40 transition-all hover:shadow-2xl hover:shadow-secondary/10 hover:-translate-y-2 flex flex-col items-center">
+<div class="size-16 rounded-xl bg-white dark:bg-slate-700 flex items-center justify-center text-primary mb-6 shadow-sm group-hover:bg-brand-gradient group-hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined text-3xl">electrical_services</span>
+</div>
+<h3 class="font-bold text-xl mb-2 text-primary w-full text-justify-safe">Electrical</h3>
+<p class="text-sm text-slate-500 leading-relaxed w-full text-justify-safe">Safe wiring &amp; appliance repair</p>
+</div>
+<div class="group cursor-pointer bg-slate-50 dark:bg-slate-800/40 p-8 rounded-2xl border border-slate-100 dark:border-slate-700 hover:border-secondary/40 transition-all hover:shadow-2xl hover:shadow-secondary/10 hover:-translate-y-2 flex flex-col items-center">
+<div class="size-16 rounded-xl bg-white dark:bg-slate-700 flex items-center justify-center text-primary mb-6 shadow-sm group-hover:bg-brand-gradient group-hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined text-3xl">ac_unit</span>
+</div>
+<h3 class="font-bold text-xl mb-2 text-primary w-full text-justify-safe">AC Repair</h3>
+<p class="text-sm text-slate-500 leading-relaxed w-full text-justify-safe">Service and gas refilling</p>
+</div>
+<div class="group cursor-pointer bg-slate-50 dark:bg-slate-800/40 p-8 rounded-2xl border border-slate-100 dark:border-slate-700 hover:border-secondary/40 transition-all hover:shadow-2xl hover:shadow-secondary/10 hover:-translate-y-2 flex flex-col items-center">
+<div class="size-16 rounded-xl bg-white dark:bg-slate-700 flex items-center justify-center text-primary mb-6 shadow-sm group-hover:bg-brand-gradient group-hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined text-3xl">cleaning_services</span>
+</div>
+<h3 class="font-bold text-xl mb-2 text-primary w-full text-justify-safe">Cleaning</h3>
+<p class="text-sm text-slate-500 leading-relaxed w-full text-justify-safe">Deep home disinfection</p>
+</div>
+<div class="group cursor-pointer bg-slate-50 dark:bg-slate-800/40 p-8 rounded-2xl border border-slate-100 dark:border-slate-700 hover:border-secondary/40 transition-all hover:shadow-2xl hover:shadow-secondary/10 hover:-translate-y-2 flex flex-col items-center">
+<div class="size-16 rounded-xl bg-white dark:bg-slate-700 flex items-center justify-center text-primary mb-6 shadow-sm group-hover:bg-brand-gradient group-hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined text-3xl">format_paint</span>
+</div>
+<h3 class="font-bold text-xl mb-2 text-primary w-full text-justify-safe">Painting</h3>
+<p class="text-sm text-slate-500 leading-relaxed w-full text-justify-safe">Professional interior/exterior</p>
+</div>
+<div class="group cursor-pointer bg-slate-50 dark:bg-slate-800/40 p-8 rounded-2xl border border-slate-100 dark:border-slate-700 hover:border-secondary/40 transition-all hover:shadow-2xl hover:shadow-secondary/10 hover:-translate-y-2 flex flex-col items-center">
+<div class="size-16 rounded-xl bg-white dark:bg-slate-700 flex items-center justify-center text-primary mb-6 shadow-sm group-hover:bg-brand-gradient group-hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined text-3xl">handyman</span>
+</div>
+<h3 class="font-bold text-xl mb-2 text-primary w-full text-justify-safe">Carpentry</h3>
+<p class="text-sm text-slate-500 leading-relaxed w-full text-justify-safe">Furniture assembly &amp; repair</p>
+</div>
+<div class="group cursor-pointer bg-slate-50 dark:bg-slate-800/40 p-8 rounded-2xl border border-slate-100 dark:border-slate-700 hover:border-secondary/40 transition-all hover:shadow-2xl hover:shadow-secondary/10 hover:-translate-y-2 flex flex-col items-center">
+<div class="size-16 rounded-xl bg-white dark:bg-slate-700 flex items-center justify-center text-primary mb-6 shadow-sm group-hover:bg-brand-gradient group-hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined text-3xl">pest_control</span>
+</div>
+<h3 class="font-bold text-xl mb-2 text-primary w-full text-justify-safe">Pest Control</h3>
+<p class="text-sm text-slate-500 leading-relaxed w-full text-justify-safe">Safe and effective removal</p>
+</div>
+<div class="group cursor-pointer bg-slate-50 dark:bg-slate-800/40 p-8 rounded-2xl border border-slate-100 dark:border-slate-700 hover:border-secondary/40 transition-all hover:shadow-2xl hover:shadow-secondary/10 hover:-translate-y-2 flex flex-col items-center">
+<div class="size-16 rounded-xl bg-white dark:bg-slate-700 flex items-center justify-center text-primary mb-6 shadow-sm group-hover:bg-brand-gradient group-hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined text-3xl">kitchen</span>
+</div>
+<h3 class="font-bold text-xl mb-2 text-primary w-full text-justify-safe">Appliances</h3>
+<p class="text-sm text-slate-500 leading-relaxed w-full text-justify-safe">Smart repairs for all brands</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24">
+<div class="max-w-[1200px] mx-auto px-6">
+<div class="bg-primary rounded-[3rem] p-16 overflow-hidden relative shadow-2xl shadow-primary/30">
+<div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/5 to-transparent"></div>
+<div class="grid lg:grid-cols-2 gap-16 items-center relative z-10">
+<div>
+<h2 class="text-4xl font-extrabold text-white mb-8 leading-tight text-justify-safe">Why Homeowners Trust ServaSetu</h2>
+<div class="space-y-8">
+<div class="flex gap-5">
+<div class="size-12 rounded-2xl bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+</div>
+<div>
+<h4 class="text-white font-bold text-lg text-justify-safe">Verified Professionals</h4>
+<p class="text-white/60 text-sm leading-relaxed text-justify-safe">Background checked &amp; certified technicians only, following strict safety protocols.</p>
+</div>
+</div>
+<div class="flex gap-5">
+<div class="size-12 rounded-2xl bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+<span class="material-symbols-outlined text-secondary">payments</span>
+</div>
+<div>
+<h4 class="text-white font-bold text-lg text-justify-safe">Transparent Pricing</h4>
+<p class="text-white/60 text-sm leading-relaxed text-justify-safe">Know the cost upfront, no hidden charges. Premium quality at honest rates.</p>
+</div>
+</div>
+<div class="flex gap-5">
+<div class="size-12 rounded-2xl bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+<span class="material-symbols-outlined text-secondary">workspace_premium</span>
+</div>
+<div>
+<h4 class="text-white font-bold text-lg text-justify-safe">Service Warranty</h4>
+<p class="text-white/60 text-sm leading-relaxed text-justify-safe">A 30-day rework warranty on all completed tasks for your peace of mind.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 rounded-[2.5rem] p-10 shadow-2xl relative">
+<div class="absolute -top-4 -right-4 size-10 bg-[var(--saffron)] rounded-full flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white text-xl">format_quote</span>
+</div>
+<div class="flex items-center gap-4 mb-8">
+<div class="size-14 rounded-full overflow-hidden bg-slate-200 ring-4 ring-slate-50 dark:ring-slate-700">
+<img alt="Happy customer Ananya Sharma" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNqX2fGaMngv7zvsCvZVnpnOy9rn3X5GKCkLFAibHvZOiZGXG02Sc5lSD2I8__sXB4j7X7M8XEppTcoh5SD-fRUaICLERZIFauYLDaKWZMKh7QK_T0deqiMHv0vkd_HSdSKTf2Ok18Yo7zckjw6T6rU2bxsr4JUhsWYL2yx3lqmqgvS2iSYNgU-FW6qONDH7bBmE--MMJNUYk9rMNilH9B90AGKcOKWdBfS_LY_D9ANi5lwqWVlD2lk7G_LbUvUY5YT_oe3z33gA6v"/>
+</div>
+<div>
+<h5 class="font-bold text-primary text-lg text-justify-safe">Ananya Sharma</h5>
+<div class="flex text-[var(--saffron)]">
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+</div>
+</div>
+</div>
+<p class="text-slate-600 dark:text-slate-300 italic text-lg leading-relaxed text-justify-safe">"The plumbing service was exceptional. The technician arrived on time, was extremely professional, and left the workspace spotless. Highly recommended for premium quality!"</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-slate-50 dark:bg-slate-900/30">
+<div class="max-w-[1200px] mx-auto px-6">
+<div class="text-center mb-20">
+<h2 class="text-4xl font-extrabold text-primary mb-6 text-justify-safe">AMC Subscription Plans</h2>
+<div class="h-1.5 w-24 bg-[var(--saffron)] rounded-full mx-auto mb-6"></div>
+<p class="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed text-justify-safe">Forget about individual service bookings. Secure your home for the whole year with our Annual Maintenance Contracts.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-10 items-stretch">
+<div class="bg-white dark:bg-slate-800 p-10 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-xl hover:-translate-y-3 transition-all duration-300 flex flex-col">
+<h3 class="text-xl font-bold mb-4 text-primary text-justify-safe">Essential</h3>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-5xl font-extrabold text-primary">$199</span>
+<span class="text-slate-400 font-medium">/year</span>
+</div>
+<ul class="space-y-5 mb-10 flex-grow">
+<li class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 text-justify-safe">
+<span class="material-symbols-outlined text-secondary font-bold">check_circle</span>
+                        2 AC Services (Standard)
+                    </li>
+<li class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 text-justify-safe">
+<span class="material-symbols-outlined text-secondary font-bold">check_circle</span>
+                        4 Plumbing Checkups
+                    </li>
+<li class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 text-justify-safe">
+<span class="material-symbols-outlined text-secondary font-bold">check_circle</span>
+                        Unlimited Electrical Help
+                    </li>
+</ul>
+<button class="w-full py-4 rounded-2xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all">Choose Plan</button>
+</div>
+<div class="bg-white dark:bg-slate-800 p-10 rounded-[2.5rem] border-4 border-primary shadow-2xl relative scale-105 hover:-translate-y-3 transition-all duration-300 flex flex-col">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-gradient text-white text-[10px] font-bold uppercase tracking-widest px-6 py-2 rounded-full shadow-lg">Most Popular</div>
+<h3 class="text-xl font-bold mb-4 text-primary text-justify-safe">Premium</h3>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-5xl font-extrabold text-primary">$349</span>
+<span class="text-slate-400 font-medium">/year</span>
+</div>
+<ul class="space-y-5 mb-10 flex-grow">
+<li class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 text-justify-safe">
+<span class="material-symbols-outlined text-secondary font-bold">check_circle</span>
+                        4 AC Services (Deep Clean)
+                    </li>
+<li class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 text-justify-safe">
+<span class="material-symbols-outlined text-secondary font-bold">check_circle</span>
+                        Full Home Cleaning (2x)
+                    </li>
+<li class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 font-semibold text-justify-safe">
+<span class="material-symbols-outlined text-secondary font-bold">check_circle</span>
+                        Priority Support (2h response)
+                    </li>
+<li class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 text-justify-safe">
+<span class="material-symbols-outlined text-secondary font-bold">check_circle</span>
+                        Pest Control (Yearly)
+                    </li>
+</ul>
+<button class="w-full py-4 rounded-2xl bg-brand-gradient text-white font-bold hover:brightness-110 shadow-lg shadow-primary/30 transition-all">Choose Plan</button>
+</div>
+<div class="bg-white dark:bg-slate-800 p-10 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-xl hover:-translate-y-3 transition-all duration-300 flex flex-col">
+<h3 class="text-xl font-bold mb-4 text-primary text-justify-safe">Elite</h3>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-5xl font-extrabold text-primary">$599</span>
+<span class="text-slate-400 font-medium">/year</span>
+</div>
+<ul class="space-y-5 mb-10 flex-grow">
+<li class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 text-justify-safe">
+<span class="material-symbols-outlined text-secondary font-bold">check_circle</span>
+                        All Inclusive Maintenance
+                    </li>
+<li class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 text-justify-safe">
+<span class="material-symbols-outlined text-secondary font-bold">check_circle</span>
+                        Dedicated Relationship Manager
+                    </li>
+<li class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 text-justify-safe">
+<span class="material-symbols-outlined text-secondary font-bold">check_circle</span>
+                        Spare Parts Coverage ($100 cap)
+                    </li>
+</ul>
+<button class="w-full py-4 rounded-2xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all">Choose Plan</button>
+</div>
+</div>
+</div>
+</section>
+<footer class="bg-slate-900 text-slate-400 py-20">
+<div class="max-w-[1200px] mx-auto px-6">
+<div class="grid md:grid-cols-4 gap-16 mb-20">
+<div class="col-span-1 md:col-span-1 flex flex-col gap-8">
+<div class="flex items-center gap-2">
+<div class="relative">
+<span class="material-symbols-outlined text-white text-3xl">home_repair_service</span>
+<div class="absolute -top-1 -right-1 size-2 bg-[var(--saffron)] rounded-full"></div>
+</div>
+<span class="text-2xl font-extrabold tracking-tight text-white">ServaSetu</span>
+</div>
+<p class="text-sm leading-relaxed text-slate-400 text-justify-safe">Modern home maintenance for the modern homeowner. Professional, reliable, and committed to a nation-first quality standard.</p>
+<div class="flex gap-5">
+<a class="size-10 rounded-xl bg-slate-800 flex items-center justify-center text-white hover:bg-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+</a>
+<a class="size-10 rounded-xl bg-slate-800 flex items-center justify-center text-white hover:bg-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</a>
+<a class="size-10 rounded-xl bg-slate-800 flex items-center justify-center text-white hover:bg-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-sm">phone_iphone</span>
+</a>
+</div>
+</div>
+<div>
+<h5 class="text-white font-bold mb-8 text-lg text-justify-safe">Company</h5>
+<ul class="space-y-4 text-sm">
+<li><a class="hover:text-secondary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Contact Us</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-white font-bold mb-8 text-lg text-justify-safe">Support</h5>
+<ul class="space-y-4 text-sm">
+<li><a class="hover:text-secondary transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Safety Guidelines</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Cookie Policy</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-white font-bold mb-8 text-lg text-justify-safe">Newsletter</h5>
+<p class="text-sm mb-6 text-justify-safe">Get home maintenance tips and exclusive offers straight to your inbox.</p>
+<div class="flex flex-col gap-3">
+<input class="bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-secondary focus:border-secondary text-white placeholder:text-slate-500" placeholder="Your email address" type="email"/>
+<button class="bg-secondary text-white px-4 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-secondary/90 transition-all">
+                        Subscribe <span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="pt-10 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-slate-500">
+<p class="text-justify-safe">© 2024 ServaSetu Technologies. Proudly serving with a nation-first spirit.</p>
+<div class="flex gap-8">
+<a class="hover:text-white transition-colors" href="#">Twitter</a>
+<a class="hover:text-white transition-colors" href="#">Instagram</a>
+<a class="hover:text-white transition-colors" href="#">LinkedIn</a>
+</div>
+</div>
+</div>
+</footer>
+
+</body></html>

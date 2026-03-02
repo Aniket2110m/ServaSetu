@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#0ddff2",
+                "background-light": "#f5f8f8",
+                "background-dark": "#102122",
+              },
+              fontFamily: {
+                "display": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+<title>ServaSetu Scheduling and Checkout</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-10 py-4 bg-white dark:bg-slate-900 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="text-primary">
+<span class="material-symbols-outlined text-4xl">home_repair_service</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">ServaSetu</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<nav class="flex items-center gap-9">
+<a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Services</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Bookings</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Support</a>
+</nav>
+<button class="flex min-w-[100px] cursor-pointer items-center justify-center rounded-xl h-10 px-5 bg-primary text-slate-900 text-sm font-bold shadow-lg shadow-primary/20">
+                        Sign Out
+                    </button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" data-alt="User profile avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDX74WF7wsDTujqhC1RyweezxkfCTxgNHYDgb3ZU2ohVrerlgx5hxfjEIiYFMNrr5_bGu5RK6K_k1pe-Gi9c6x2o36CmWDrs-gmLANHH6i2_Bgy-2Ol17VNmklmFM_vxGvPHxkzCu_wNE4j83Bmcapxq5eDMlKiTIEU2UXGT88RArsgpKSr8auSIfcGf3SnDWKbnPma90Cm6skRmSt0TtBx_miojLbgvpG8udQPOBHqQg0QhH_QYLu1k36KAMpWl0MAXbetckiFWIga");'></div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto w-full px-6 py-8">
+<div class="flex flex-wrap gap-2 mb-6">
+<a class="text-slate-500 text-sm font-medium hover:text-primary transition-colors" href="#">Home</a>
+<span class="text-slate-400 text-sm font-medium">/</span>
+<a class="text-slate-500 text-sm font-medium hover:text-primary transition-colors" href="#">Plumbing Services</a>
+<span class="text-slate-400 text-sm font-medium">/</span>
+<span class="text-slate-900 dark:text-white text-sm font-bold">Scheduling &amp; Checkout</span>
+</div>
+<div class="mb-10">
+<h1 class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tight">Complete Your Booking</h1>
+<p class="text-slate-500 mt-2 text-lg">Select a convenient time and preferred payment method to confirm your service.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 space-y-8">
+<section class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3 mb-6">
+<span class="bg-primary/20 text-primary w-8 h-8 rounded-full flex items-center justify-center font-bold">1</span>
+<h2 class="text-xl font-bold text-slate-900 dark:text-white">Select Date &amp; Time</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+<div class="calendar-container border border-slate-100 dark:border-slate-800 rounded-xl p-4">
+<div class="flex items-center justify-between mb-4 px-2">
+<button class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<p class="text-slate-900 dark:text-white font-bold">October 2023</p>
+<button class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center text-xs font-bold text-slate-400 mb-2">
+<div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
+</div>
+<div class="grid grid-cols-7 gap-1">
+<div class="p-2 text-slate-300">28</div>
+<div class="p-2 text-slate-300">29</div>
+<div class="p-2 text-slate-300">30</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">1</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">2</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">3</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">4</div>
+<div class="p-2 font-medium bg-primary text-slate-900 rounded-lg font-bold">5</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">6</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">7</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">8</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">9</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">10</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">11</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">12</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">13</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">14</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">15</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">16</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">17</div>
+<div class="p-2 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer rounded-lg">18</div>
+</div>
+</div>
+<div class="space-y-4">
+<h3 class="font-semibold text-slate-700 dark:text-slate-300">Available Time Slots</h3>
+<div class="grid grid-cols-2 gap-3">
+<button class="py-3 px-4 rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-medium hover:border-primary hover:bg-primary/5 transition-all text-center">09:00 AM</button>
+<button class="py-3 px-4 rounded-lg border-2 border-primary bg-primary/10 text-slate-900 dark:text-white text-sm font-bold text-center">11:30 AM</button>
+<button class="py-3 px-4 rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-medium hover:border-primary hover:bg-primary/5 transition-all text-center">02:00 PM</button>
+<button class="py-3 px-4 rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-medium hover:border-primary hover:bg-primary/5 transition-all text-center">04:30 PM</button>
+<button class="py-3 px-4 rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-medium hover:border-primary hover:bg-primary/5 transition-all text-center">06:00 PM</button>
+<button class="py-3 px-4 rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-medium hover:border-primary hover:bg-primary/5 transition-all text-center">08:00 PM</button>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3 mb-6">
+<span class="bg-primary/20 text-primary w-8 h-8 rounded-full flex items-center justify-center font-bold">2</span>
+<h2 class="text-xl font-bold text-slate-900 dark:text-white">Payment Method</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="relative p-5 border-2 border-primary bg-primary/5 rounded-xl flex flex-col items-center gap-3 text-center cursor-pointer group">
+<span class="material-symbols-outlined text-primary text-3xl">account_balance_wallet</span>
+<p class="font-bold text-slate-900 dark:text-white">UPI Payment</p>
+<p class="text-xs text-slate-500">Google Pay, PhonePe, Paytm</p>
+<div class="absolute top-3 right-3">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+</div>
+</div>
+<div class="p-5 border border-slate-200 dark:border-slate-800 rounded-xl flex flex-col items-center gap-3 text-center cursor-pointer hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary text-3xl">credit_card</span>
+<p class="font-bold text-slate-900 dark:text-white">Cards</p>
+<p class="text-xs text-slate-500">Credit or Debit Cards</p>
+</div>
+<div class="p-5 border border-slate-200 dark:border-slate-800 rounded-xl flex flex-col items-center gap-3 text-center cursor-pointer hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-slate-400 text-3xl">account_balance</span>
+<p class="font-bold text-slate-900 dark:text-white">Net Banking</p>
+<p class="text-xs text-slate-500">All Major Indian Banks</p>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800">
+<label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Enter UPI ID</label>
+<div class="flex gap-4">
+<input class="flex-1 bg-slate-50 dark:bg-slate-800 border-none rounded-lg focus:ring-2 focus:ring-primary text-slate-900 dark:text-white px-4 h-12" placeholder="username@upi" type="text"/>
+<button class="bg-slate-900 dark:bg-slate-800 text-white dark:text-primary font-bold px-6 rounded-lg">Verify</button>
+</div>
+</div>
+</section>
+</div>
+<div class="lg:col-span-1">
+<div class="sticky top-24">
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden">
+<div class="bg-slate-900 dark:bg-slate-800 p-6 text-white">
+<h3 class="text-lg font-bold">Order Summary</h3>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex items-start gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
+<div class="w-16 h-16 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">water_damage</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-slate-900 dark:text-white text-justify">Tap Leakage Repair</h4>
+<p class="text-xs text-slate-500 text-justify">Standard repair for all common faucet issues. Includes washers and labor.</p>
+</div>
+</div>
+<div class="space-y-3 pt-2">
+<div class="flex justify-between items-center text-sm">
+<span class="text-slate-500">Service Date</span>
+<span class="font-semibold text-slate-900 dark:text-white">Oct 5, 2023</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-slate-500">Time Slot</span>
+<span class="font-semibold text-slate-900 dark:text-white">11:30 AM</span>
+</div>
+<div class="border-t border-dashed border-slate-200 dark:border-slate-700 my-4"></div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-slate-500">Subtotal</span>
+<span class="font-semibold text-slate-900 dark:text-white">₹449.00</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-slate-500">Service Tax (12%)</span>
+<span class="font-semibold text-slate-900 dark:text-white">₹50.00</span>
+</div>
+<div class="pt-4 flex justify-between items-center">
+<span class="text-lg font-black text-slate-900 dark:text-white">Total</span>
+<span class="text-2xl font-black text-primary">₹499.00</span>
+</div>
+</div>
+<button class="w-full mt-6 bg-gradient-to-r from-primary to-[#08b8c9] hover:from-[#08b8c9] hover:to-primary text-slate-900 font-black py-4 rounded-xl shadow-lg shadow-primary/30 transition-all flex items-center justify-center gap-2 group">
+<span>Proceed to Pay</span>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+<p class="text-[10px] text-center text-slate-400 mt-4 px-4 uppercase tracking-widest font-bold">Secure checkout powered by Razorpay</p>
+</div>
+</div>
+<div class="mt-6 flex items-center justify-center gap-4 text-slate-400">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span class="text-xs font-medium uppercase tracking-tighter">Safe &amp; Secure Payment Guaranteed</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-background-dark text-slate-400 py-12 px-10 mt-20 border-t border-slate-800">
+<div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 text-white mb-6">
+<span class="material-symbols-outlined text-primary">home_repair_service</span>
+<span class="text-xl font-bold">ServaSetu</span>
+</div>
+<p class="text-sm leading-relaxed text-justify">Premium home services at your doorstep. We bridge the gap between quality professionals and homeowners.</p>
+</div>
+<div>
+<h4 class="text-white font-bold mb-6">Quick Links</h4>
+<ul class="space-y-4 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Find Services</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Become a Partner</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Pricing Plans</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-6">Policies</h4>
+<ul class="space-y-4 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Refund Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Safety Guidelines</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-6">Newsletter</h4>
+<p class="text-sm mb-4 text-justify">Subscribe to get updates on seasonal discounts and new services.</p>
+<div class="flex gap-2">
+<input class="bg-slate-800 border-none rounded-lg text-xs w-full focus:ring-1 focus:ring-primary text-white" placeholder="Email" type="email"/>
+<button class="bg-primary text-slate-900 p-2 rounded-lg"><span class="material-symbols-outlined text-sm">send</span></button>
+</div>
+</div>
+</div>
+<div class="max-w-[1200px] mx-auto mt-12 pt-8 border-t border-slate-800 flex flex-col md:row justify-between items-center gap-4 text-xs font-medium">
+<p>© 2023 ServaSetu Technologies Private Limited. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-white" href="#">Instagram</a>
+<a class="hover:text-white" href="#">Twitter</a>
+<a class="hover:text-white" href="#">LinkedIn</a>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>
