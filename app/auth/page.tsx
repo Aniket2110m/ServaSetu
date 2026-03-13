@@ -8,6 +8,12 @@ import { useRouter } from "next/navigation";
 export default function AuthPage() {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [socialLoading, setSocialLoading] = useState<"google" | "phone" | null>(null);
+  const [authFeedback, setAuthFeedback] = useState<{
+    type: "idle" | "loading" | "success" | "error";
+    message: string;
+  }>({ type: "idle", message: "" });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,47 +21,92 @@ export default function AuthPage() {
     password: "",
   });
 
-  const handleGoogleAuth = () => {
-    const googleAuthUrl = process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL;
-
-    if (!googleAuthUrl) {
-      // For demo: set token and redirect
-      localStorage.setItem('userToken', JSON.stringify({ 
-        provider: 'google', 
-        timestamp: new Date().toISOString() 
-      }));
-      router.push('/booking');
-      return;
-    }
-
-    window.location.href = googleAuthUrl;
+  const passwordChecks = {
+    minLength: formData.password.length >= 8,
+    hasNumber: /\d/.test(formData.password),
+    hasMixedCase: /[a-z]/.test(formData.password) && /[A-Z]/.test(formData.password),
   };
 
-  const handlePhoneAuth = () => {
-    const phoneAuthUrl = process.env.NEXT_PUBLIC_PHONE_AUTH_URL;
+  const isSignupPasswordStrong =
+    passwordChecks.minLength && passwordChecks.hasNumber && passwordChecks.hasMixedCase;
 
-    if (!phoneAuthUrl) {
-      // For demo: set token and redirect
-      localStorage.setItem('userToken', JSON.stringify({ 
-        provider: 'phone', 
-        timestamp: new Date().toISOString() 
-      }));
-      router.push('/booking');
-      return;
+  const handleGoogleAuth = async () => {
+    setSocialLoading("google");
+    setAuthFeedback({ type: "loading", message: "Connecting to Google..." });
+
+    try {
+      const googleAuthUrl = process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL;
+
+      if (!googleAuthUrl) {
+        localStorage.setItem("userToken", JSON.stringify({
+          provider: "google",
+          timestamp: new Date().toISOString(),
+        }));
+        setAuthFeedback({ type: "success", message: "Signed in successfully. Redirecting..." });
+        router.push("/booking");
+        return;
+      }
+
+      window.location.href = googleAuthUrl;
+    } catch {
+      setAuthFeedback({ type: "error", message: "Unable to start Google sign-in. Please try again." });
+    } finally {
+      setSocialLoading(null);
     }
-
-    window.location.href = phoneAuthUrl;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handlePhoneAuth = async () => {
+    setSocialLoading("phone");
+    setAuthFeedback({ type: "loading", message: "Verifying phone login..." });
+
+    try {
+      const phoneAuthUrl = process.env.NEXT_PUBLIC_PHONE_AUTH_URL;
+
+      if (!phoneAuthUrl) {
+        localStorage.setItem("userToken", JSON.stringify({
+          provider: "phone",
+          timestamp: new Date().toISOString(),
+        }));
+        setAuthFeedback({ type: "success", message: "Signed in successfully. Redirecting..." });
+        router.push("/booking");
+        return;
+      }
+
+      window.location.href = phoneAuthUrl;
+    } catch {
+      setAuthFeedback({ type: "error", message: "Unable to start phone sign-in. Please try again." });
+    } finally {
+      setSocialLoading(null);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Set authentication token in localStorage
-    localStorage.setItem('userToken', JSON.stringify({ 
-      email: formData.email, 
-      timestamp: new Date().toISOString() 
-    }));
-    // Redirect to booking page
-    router.push('/booking');
+
+    if (!isLogin && !isSignupPasswordStrong) {
+      setAuthFeedback({
+        type: "error",
+        message: "Please set a stronger password to continue signup.",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setAuthFeedback({ type: "loading", message: isLogin ? "Signing you in..." : "Creating your account..." });
+
+    try {
+      localStorage.setItem("userToken", JSON.stringify({
+        email: formData.email,
+        timestamp: new Date().toISOString(),
+      }));
+
+      setAuthFeedback({ type: "success", message: "Authentication successful. Redirecting..." });
+      router.push("/booking");
+    } catch {
+      setAuthFeedback({ type: "error", message: "Authentication failed. Please retry." });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -158,6 +209,27 @@ export default function AuthPage() {
             </p>
           </div>
 
+          {authFeedback.type !== "idle" && (
+            <div
+              className={`mb-4 rounded-xl px-4 py-3 text-sm font-medium flex items-center gap-2 ${
+                authFeedback.type === "error"
+                  ? "bg-red-50 text-red-700 border border-red-200"
+                  : authFeedback.type === "success"
+                  ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                  : "bg-blue-50 text-blue-700 border border-blue-200"
+              }`}
+            >
+              <span className="material-symbols-outlined text-base">
+                {authFeedback.type === "error"
+                  ? "error"
+                  : authFeedback.type === "success"
+                  ? "check_circle"
+                  : "hourglass_top"}
+              </span>
+              {authFeedback.message}
+            </div>
+          )}
+
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             {!isLogin && (
@@ -246,6 +318,23 @@ export default function AuthPage() {
                   required
                 />
               </div>
+              {!isLogin && (
+                <div className="mt-2 space-y-1 text-xs">
+                  <p className="text-slate-500 font-semibold">Password should include:</p>
+                  <div className={`flex items-center gap-1 ${passwordChecks.minLength ? "text-emerald-600" : "text-slate-500"}`}>
+                    <span className="material-symbols-outlined text-sm">{passwordChecks.minLength ? "check_circle" : "radio_button_unchecked"}</span>
+                    At least 8 characters
+                  </div>
+                  <div className={`flex items-center gap-1 ${passwordChecks.hasNumber ? "text-emerald-600" : "text-slate-500"}`}>
+                    <span className="material-symbols-outlined text-sm">{passwordChecks.hasNumber ? "check_circle" : "radio_button_unchecked"}</span>
+                    One number
+                  </div>
+                  <div className={`flex items-center gap-1 ${passwordChecks.hasMixedCase ? "text-emerald-600" : "text-slate-500"}`}>
+                    <span className="material-symbols-outlined text-sm">{passwordChecks.hasMixedCase ? "check_circle" : "radio_button_unchecked"}</span>
+                    One uppercase and one lowercase letter
+                  </div>
+                </div>
+              )}
             </div>
 
             {isLogin && (
@@ -275,22 +364,23 @@ export default function AuthPage() {
                 />
                 <label className="text-sm text-slate-600">
                   I agree to the{" "}
-                  <a href="#" className="text-[#1F4E8C] font-semibold hover:underline">
+                  <Link href="/terms" className="text-[#1F4E8C] font-semibold hover:underline">
                     Terms of Service
-                  </a>{" "}
+                  </Link>{" "}
                   and{" "}
-                  <a href="#" className="text-[#1F4E8C] font-semibold hover:underline">
+                  <Link href="/privacy" className="text-[#1F4E8C] font-semibold hover:underline">
                     Privacy Policy
-                  </a>
+                  </Link>
                 </label>
               </div>
             )}
 
             <button
               type="submit"
-              className="w-full bg-brand-gradient text-white py-3 rounded-xl font-bold text-base hover:shadow-xl hover:brightness-110 transition-all"
+              disabled={isSubmitting || socialLoading !== null}
+              className="w-full bg-brand-gradient text-white py-3 rounded-xl font-bold text-base hover:shadow-xl hover:brightness-110 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {isLogin ? "Login to Account" : "Create Account"}
+              {isSubmitting ? "Please wait..." : isLogin ? "Login to Account" : "Create Account"}
             </button>
           </form>
 
@@ -306,7 +396,8 @@ export default function AuthPage() {
             <button
               type="button"
               onClick={handleGoogleAuth}
-              className="flex items-center justify-center gap-2 py-2.5 px-4 border-2 border-slate-200 rounded-xl font-semibold text-slate-700 hover:border-[#1F4E8C] hover:bg-slate-50 transition-all"
+              disabled={isSubmitting || socialLoading !== null}
+              className="flex items-center justify-center gap-2 py-2.5 px-4 border-2 border-slate-200 rounded-xl font-semibold text-slate-700 hover:border-[#1F4E8C] hover:bg-slate-50 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path
@@ -326,15 +417,16 @@ export default function AuthPage() {
                   d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                 />
               </svg>
-              Google
+              {socialLoading === "google" ? "Connecting..." : "Google"}
             </button>
             <button
               type="button"
               onClick={handlePhoneAuth}
-              className="flex items-center justify-center gap-2 py-2.5 px-4 border-2 border-slate-200 rounded-xl font-semibold text-slate-700 hover:border-[#1F4E8C] hover:bg-slate-50 transition-all"
+              disabled={isSubmitting || socialLoading !== null}
+              className="flex items-center justify-center gap-2 py-2.5 px-4 border-2 border-slate-200 rounded-xl font-semibold text-slate-700 hover:border-[#1F4E8C] hover:bg-slate-50 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <span className="material-symbols-outlined text-2xl">phone</span>
-              Phone Number
+              {socialLoading === "phone" ? "Connecting..." : "Phone Number"}
             </button>
           </div>
 

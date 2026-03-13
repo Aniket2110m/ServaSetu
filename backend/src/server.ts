@@ -17,6 +17,20 @@ import authRoutes from './routes/auth.routes';
 // Load environment variables
 dotenv.config();
 
+const parseAllowedOrigins = (): string[] => {
+  const configuredOrigins = process.env.FRONTEND_URLS || process.env.FRONTEND_URL || '';
+  const origins = configuredOrigins
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+  // Always allow local development origins unless explicitly disabled.
+  const devOrigins = ['http://localhost:3000', 'http://127.0.0.1:3000'];
+  return Array.from(new Set([...origins, ...devOrigins]));
+};
+
+const allowedOrigins = parseAllowedOrigins();
+
 // Initialize express app
 const app: Application = express();
 
@@ -26,7 +40,16 @@ connectDB();
 // Middleware
 app.use(helmet()); // Security headers
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    // Allow server-to-server requests and health checks without Origin header.
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`CORS blocked for origin: ${origin}`));
+  },
   credentials: true
 }));
 app.use(morgan('dev')); // Request logging

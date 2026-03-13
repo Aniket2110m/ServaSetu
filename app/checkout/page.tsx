@@ -8,6 +8,7 @@ import { format, startOfToday } from "date-fns";
 import "react-day-picker/dist/style.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FlowProgress from "@/components/FlowProgress";
 import { useRouter } from "next/navigation";
 
 interface SelectedService {
@@ -83,40 +84,13 @@ export default function CheckoutPage() {
     return getSubtotal() + getTax();
   };
 
-  const totalSteps = 4;
-  const currentStep = 3;
-  const progressPosition = ((currentStep - 1) / (totalSteps - 1)) * 100;
-
   return (
     <div className="min-h-screen flex flex-col overflow-x-hidden bg-gradient-to-b from-white via-[#F5F7FA] to-white">
       {!isAuthenticated && <></>}
       <Navbar />
 
       <main className="flex w-full flex-col px-6 py-12 md:px-20 flex-grow">
-        <div className="px-6 md:px-8 py-12 mb-8 bg-gradient-to-r from-blue-600 to-emerald-500 rounded-3xl shadow-xl">
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-bold text-white">Scheduling & Checkout</h3>
-              <span className="text-sm font-bold text-white">{Math.round((currentStep / totalSteps) * 100)}% Complete</span>
-            </div>
-            <div className="relative h-2 w-full rounded-full bg-white/30">
-              <div
-                className="absolute h-full rounded-full bg-white"
-                style={{ width: `${progressPosition}%` }}
-              ></div>
-              <div
-                className="absolute top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-2 border-white bg-emerald-400 shadow-md"
-                style={{ left: `calc(${progressPosition}% - 8px)` }}
-              ></div>
-            </div>
-            <div className="grid grid-cols-4 w-full text-[11px] font-bold uppercase tracking-wider text-white/80">
-              <div className="text-white">1. Select Service</div>
-              <div className="px-4 text-white">2. Schedule</div>
-              <div className="px-4">3. Address</div>
-              <div className="text-right">4. Payment</div>
-            </div>
-          </div>
-        </div>
+        <FlowProgress title="Scheduling & Checkout" currentStep={2} />
 
         <div className="w-full max-w-[1280px] mx-auto">
         {/* Page Title */}

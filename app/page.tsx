@@ -10,16 +10,21 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <header className="relative -mt-20 pb-28 overflow-hidden bg-gradient-to-br from-[#FF9933]/60 via-white/45 to-[#138808]/60 w-full">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FF9933]/20 to-transparent"></div>
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-white rounded-t-[50%]"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 text-center relative z-10">
+      <header className="relative -mt-20 pb-28 min-h-[90vh] flex flex-col justify-center overflow-hidden bg-gradient-to-br from-[#FF9933]/60 via-white/45 to-[#138808]/60 w-full">
+        {/* Decorative Abstract Orbs */}
+        <div className="absolute top-0 left-0 w-[540px] h-[540px] bg-[#FF9933]/25 rounded-full blur-[120px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-[640px] h-[640px] bg-[#138808]/20 rounded-full blur-[120px] pointer-events-none translate-x-1/3 translate-y-1/3"></div>
+        <div className="absolute top-1/2 left-1/2 w-[860px] h-[440px] bg-white/30 rounded-full blur-[100px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+        
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-white rounded-t-[50%] z-10 border-t border-slate-100/50"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 text-center relative z-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D5ECE8] text-[#1A6E5C] text-[11px] font-bold uppercase tracking-widest">
             <span className="material-symbols-outlined text-sm">verified</span>
             Nation-First Professionalism
           </div>
 
-          <h1 className="mt-6 sm:mt-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#1B2430]">
+          <h1 className="mt-6 sm:mt-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-[#1B2430]">
             Bharat's Bridge to Better Service.
           </h1>
 
@@ -29,17 +34,24 @@ export default function Home() {
             task.
           </p>
 
-          <div className="mt-6 sm:mt-8 max-w-md mx-auto px-4 sm:px-0">
-            <div className="relative w-full">
-              <span className="material-symbols-outlined text-slate-400 absolute left-7 top-1/2 -translate-y-1/2 text-base">
+          <div className="mt-6 sm:mt-8 max-w-lg mx-auto px-4 sm:px-0">
+            <form action="/booking" method="get" className="relative w-full">
+              <span className="material-symbols-outlined text-slate-400 absolute left-5 top-1/2 -translate-y-1/2 text-base pointer-events-none">
                     search
               </span>
               <input
-                className="w-full bg-white border border-slate-200 rounded-full pl-11 pr-6 py-4 sm:py-5 text-base sm:text-lg text-slate-900 text-center placeholder:text-slate-400 focus:ring-2 focus:ring-[#1B5DA5] focus:border-[#1B5DA5] shadow-lg"
+                name="service"
+                className="w-full bg-white border border-slate-200 rounded-full pl-14 pr-32 py-4 sm:py-5 text-base sm:text-lg text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-[#1B5DA5] focus:border-[#1B5DA5] shadow-lg"
                 placeholder="Find trusted professionals near you !"
                 type="text"
               />
-            </div>
+              <button
+                type="submit"
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#1B5DA5] text-white px-5 py-2.5 rounded-full text-sm font-bold hover:brightness-110 transition-all"
+              >
+                Search
+              </button>
+            </form>
           </div>
 
           <div className="mt-8 sm:mt-10 flex items-center justify-center px-4 sm:px-0">
@@ -237,13 +249,13 @@ export default function Home() {
           </div>
         </div>
         
-        <div className="relative">
+        <div className="relative group/testimonials">
           {/* Gradient overlays for smooth fade effect */}
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
           
           {/* Scrolling container */}
-          <div className="flex animate-scroll">
+          <div className="flex animate-scroll group-hover/testimonials:[animation-play-state:paused] hover:[animation-play-state:paused]">
             {/* First set of testimonials */}
             {[
               {
@@ -411,15 +423,15 @@ export default function Home() {
               {/* Step 1 - Left */}
               <div className="relative animate-fade-in-up" style={{ animationDelay: "0ms" }}>
                 <div className="md:w-1/2 md:ml-0 md:mr-auto">
-                  <div className="group bg-[#F6F9FC] hover:bg-slate-400 p-8 rounded-2xl border border-slate-200 hover:border-slate-400 transition-all duration-300 relative">
+                  <div className="group bg-[#F6F9FC] hover:bg-slate-400 p-8 rounded-2xl border border-slate-200 hover:border-slate-400 hover:shadow-[0_0_0_1px_rgba(59,130,246,0.25),0_20px_45px_-20px_rgba(30,64,175,0.45)] transition-all duration-300 relative">
                     {/* Step Number */}
                     <div className="absolute -left-16 top-8 hidden md:flex w-12 h-12 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-full items-center justify-center text-white font-bold text-lg shadow-lg z-10">
                       1
                     </div>
                     
                     {/* Icon */}
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#FF9933] to-[#1FA37A] rounded-full flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-300 mb-6 mx-auto">
-                      <span className="material-symbols-outlined text-3xl text-white">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#FF9933] to-[#1FA37A] rounded-full flex items-center justify-center shadow-lg group-hover:shadow-2xl group-hover:-translate-y-1 group-hover:scale-110 ring-1 ring-white/40 transition-all duration-300 mb-6 mx-auto">
+                      <span className="material-symbols-outlined text-3xl text-white transition-transform duration-300 group-hover:-translate-y-0.5" style={{ fontVariationSettings: "'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24" }}>
                         search
                       </span>
                     </div>
@@ -437,15 +449,15 @@ export default function Home() {
               {/* Step 2 - Right */}
               <div className="relative animate-fade-in-up" style={{ animationDelay: "200ms" }}>
                 <div className="md:w-1/2 md:ml-auto md:mr-0">
-                  <div className="group bg-[#F6F9FC] hover:bg-slate-400 p-8 rounded-2xl border border-slate-200 hover:border-slate-400 transition-all duration-300 relative">
+                  <div className="group bg-[#F6F9FC] hover:bg-slate-400 p-8 rounded-2xl border border-slate-200 hover:border-slate-400 hover:shadow-[0_0_0_1px_rgba(59,130,246,0.25),0_20px_45px_-20px_rgba(30,64,175,0.45)] transition-all duration-300 relative">
                     {/* Step Number */}
                     <div className="absolute -right-16 top-8 hidden md:flex w-12 h-12 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-full items-center justify-center text-white font-bold text-lg shadow-lg z-10">
                       2
                     </div>
 
                     {/* Icon */}
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#FF9933] to-[#1FA37A] rounded-full flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-300 mb-6 mx-auto">
-                      <span className="material-symbols-outlined text-3xl text-white">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#FF9933] to-[#1FA37A] rounded-full flex items-center justify-center shadow-lg group-hover:shadow-2xl group-hover:-translate-y-1 group-hover:scale-110 ring-1 ring-white/40 transition-all duration-300 mb-6 mx-auto">
+                      <span className="material-symbols-outlined text-3xl text-white transition-transform duration-300 group-hover:-translate-y-0.5" style={{ fontVariationSettings: "'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24" }}>
                         calendar_month
                       </span>
                     </div>
@@ -463,15 +475,15 @@ export default function Home() {
               {/* Step 3 - Left */}
               <div className="relative animate-fade-in-up" style={{ animationDelay: "400ms" }}>
                 <div className="md:w-1/2 md:ml-0 md:mr-auto">
-                  <div className="group bg-[#F6F9FC] hover:bg-slate-400 p-8 rounded-2xl border border-slate-200 hover:border-slate-400 transition-all duration-300 relative">
+                  <div className="group bg-[#F6F9FC] hover:bg-slate-400 p-8 rounded-2xl border border-slate-200 hover:border-slate-400 hover:shadow-[0_0_0_1px_rgba(59,130,246,0.25),0_20px_45px_-20px_rgba(30,64,175,0.45)] transition-all duration-300 relative">
                     {/* Step Number */}
                     <div className="absolute -left-16 top-8 hidden md:flex w-12 h-12 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-full items-center justify-center text-white font-bold text-lg shadow-lg z-10">
                       3
                     </div>
 
                     {/* Icon */}
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#FF9933] to-[#1FA37A] rounded-full flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-300 mb-6 mx-auto">
-                      <span className="material-symbols-outlined text-3xl text-white">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#FF9933] to-[#1FA37A] rounded-full flex items-center justify-center shadow-lg group-hover:shadow-2xl group-hover:-translate-y-1 group-hover:scale-110 ring-1 ring-white/40 transition-all duration-300 mb-6 mx-auto">
+                      <span className="material-symbols-outlined text-3xl text-white transition-transform duration-300 group-hover:-translate-y-0.5" style={{ fontVariationSettings: "'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24" }}>
                         home_repair_service
                       </span>
                     </div>
@@ -489,15 +501,15 @@ export default function Home() {
               {/* Step 4 - Right */}
               <div className="relative animate-fade-in-up" style={{ animationDelay: "600ms" }}>
                 <div className="md:w-1/2 md:ml-auto md:mr-0">
-                  <div className="group bg-[#F6F9FC] hover:bg-slate-400 p-8 rounded-2xl border border-slate-200 hover:border-slate-400 transition-all duration-300 relative">
+                  <div className="group bg-[#F6F9FC] hover:bg-slate-400 p-8 rounded-2xl border border-slate-200 hover:border-slate-400 hover:shadow-[0_0_0_1px_rgba(59,130,246,0.25),0_20px_45px_-20px_rgba(30,64,175,0.45)] transition-all duration-300 relative">
                     {/* Step Number */}
                     <div className="absolute -right-16 top-8 hidden md:flex w-12 h-12 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-full items-center justify-center text-white font-bold text-lg shadow-lg z-10">
                       4
                     </div>
 
                     {/* Icon */}
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#FF9933] to-[#1FA37A] rounded-full flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-300 mb-6 mx-auto">
-                      <span className="material-symbols-outlined text-3xl text-white">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#FF9933] to-[#1FA37A] rounded-full flex items-center justify-center shadow-lg group-hover:shadow-2xl group-hover:-translate-y-1 group-hover:scale-110 ring-1 ring-white/40 transition-all duration-300 mb-6 mx-auto">
+                      <span className="material-symbols-outlined text-3xl text-white transition-transform duration-300 group-hover:-translate-y-0.5" style={{ fontVariationSettings: "'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24" }}>
                         rate_review
                       </span>
                     </div>
@@ -595,10 +607,10 @@ export default function Home() {
               <Link
                 key={service.title}
                 href={service.categoryId ? `/booking?category=${service.categoryId}` : "/booking"}
-                className="group bg-[#F6F9FC] rounded-xl md:rounded-2xl p-4 md:p-6 border border-slate-100 hover:bg-slate-400 hover:border-slate-500 hover:shadow-lg hover:shadow-slate-400/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                className="group bg-[#F6F9FC] rounded-xl md:rounded-2xl p-4 md:p-6 border border-slate-100 hover:bg-slate-400 hover:border-slate-500 hover:shadow-lg hover:shadow-slate-400/50 hover:ring-2 hover:ring-[#1B5DA5]/30 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
               >
-                <div className="size-10 md:size-12 rounded-lg md:rounded-xl bg-white flex items-center justify-center text-[#1B5DA5] shadow-sm mb-3 md:mb-4 group-hover:bg-gradient-to-br group-hover:from-[#FF9933] group-hover:to-[#1FA37A] group-hover:text-white transition-all duration-300 mx-auto">
-                  <span className="material-symbols-outlined text-xl md:text-2xl">
+                <div className="size-10 md:size-12 rounded-lg md:rounded-xl bg-white flex items-center justify-center text-[#1B5DA5] shadow-sm mb-3 md:mb-4 group-hover:bg-gradient-to-br group-hover:from-[#FF9933] group-hover:to-[#1FA37A] group-hover:text-white group-hover:-translate-y-1 group-hover:scale-105 group-hover:shadow-xl transition-all duration-300 mx-auto">
+                  <span className="material-symbols-outlined text-xl md:text-2xl transition-transform duration-300 group-hover:-translate-y-0.5" style={{ fontVariationSettings: "'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24" }}>
                     {service.icon}
                   </span>
                 </div>

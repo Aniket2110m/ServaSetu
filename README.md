@@ -95,11 +95,15 @@ Navigate to `http://localhost:3000`
 - `npm start` - Start production server
 - `npm run lint` - Run ESLint
 
-## 🌐 Deploy on Vercel
+## 🌐 Deploy on Hostinger
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new).
+Use `HOSTINGER_DEPLOYMENT_GUIDE.md` in this repository for production deployment to `servasetu.com`.
 
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+It includes:
+- VPS setup
+- DNS records for root + `www`
+- SSL and reverse proxy configuration
+- PM2 process management for frontend and backend
 
 ---
 

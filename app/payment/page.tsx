@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FlowProgress from "@/components/FlowProgress";
 
 interface SelectedService {
   id: string;
@@ -23,6 +24,13 @@ export default function PaymentPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [loading, setLoading] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [errorType, setErrorType] = useState<"order" | "verify" | "init" | "method" | null>(null);
+
+  const clearError = () => {
+    setPaymentError(null);
+    setErrorType(null);
+  };
 
   // Check authentication
   useEffect(() => {
@@ -84,7 +92,8 @@ export default function PaymentPage() {
       const orderData = await response.json();
 
       if (!orderData.id) {
-        alert("Failed to create order");
+        setPaymentError("We couldn't create your order with the payment provider. Please try again.");
+        setErrorType("order");
         setLoading(false);
         return;
       }
@@ -128,7 +137,8 @@ export default function PaymentPage() {
             // Redirect to confirmation
             router.push("/confirmation");
           } else {
-            alert("Payment verification failed");
+            setPaymentError("Your payment went through but verification failed. Don't worry — if your account was debited, it will be refunded within 5–7 business days.");
+            setErrorType("verify");
           }
 
           setLoading(false);
@@ -143,18 +153,29 @@ export default function PaymentPage() {
         },
       };
 
-      // Load Razorpay script
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/checkout.js";
-      script.async = true;
-      script.onload = () => {
+      // Load Razorpay script (avoid duplicates)
+      if ((window as any).Razorpay) {
         const rzp1 = new (window as any).Razorpay(options);
         rzp1.open();
-      };
-      document.body.appendChild(script);
+      } else {
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        script.async = true;
+        script.onload = () => {
+          const rzp1 = new (window as any).Razorpay(options);
+          rzp1.open();
+        };
+        script.onerror = () => {
+          setPaymentError("Failed to load the payment gateway. Please check your internet connection and try again.");
+          setErrorType("init");
+          setLoading(false);
+        };
+        document.body.appendChild(script);
+      }
     } catch (error) {
       console.error("Payment error:", error);
-      alert("Payment initiation failed");
+      setPaymentError("Payment initiation failed. Please try again or choose a different method.");
+      setErrorType("init");
       setLoading(false);
     }
   };
@@ -167,9 +188,11 @@ export default function PaymentPage() {
 
   const handlePlaceService = async () => {
     if (!selectedMethod) {
-      alert("Please select a payment method");
+      setPaymentError("Please select a payment method to continue.");
+      setErrorType("method");
       return;
     }
+    clearError();
 
     if (selectedMethod === "razorpay") {
       await handleRazorpayPayment();
@@ -184,29 +207,7 @@ export default function PaymentPage() {
       <Navbar />
 
       <main className="flex w-full flex-col px-6 py-12 md:px-20 flex-grow">
-        <div className="px-6 md:px-8 py-12 mb-8 bg-gradient-to-r from-blue-600 to-emerald-500 rounded-3xl shadow-xl">
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-bold text-white">Complete Your Payment</h3>
-              <span className="text-sm font-bold text-white">100% Complete</span>
-            </div>
-
-            <div className="relative h-2 w-full rounded-full bg-white/30">
-              <div className="absolute h-full rounded-full bg-white" style={{ width: "100%" }}></div>
-              <div
-                className="absolute top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-2 border-white bg-emerald-400 shadow-md"
-                style={{ left: "calc(100% - 8px)" }}
-              ></div>
-            </div>
-
-            <div className="grid grid-cols-4 w-full text-[11px] font-bold uppercase tracking-wider text-white/80">
-              <div className="text-white/60">1. Select Service</div>
-              <div className="px-4 text-white/60">2. Schedule</div>
-              <div className="px-4 text-white/60">3. Address</div>
-              <div className="text-right text-white">4. Payment</div>
-            </div>
-          </div>
-        </div>
+        <FlowProgress title="Complete Your Payment" currentStep={4} />
 
         <div className="w-full max-w-[1280px] mx-auto">
           <div className="mb-10 text-center">
@@ -346,16 +347,68 @@ export default function PaymentPage() {
                   All payments are secure and encrypted
                 </p>
 
+                {/* Inline error card */}
+                {paymentError && (
+                  <div className="mt-6 rounded-xl border border-red-200 bg-red-50 p-4">
+                    <div className="flex items-start gap-3">
+                      <span className="material-symbols-outlined text-red-500 flex-shrink-0 mt-0.5">error</span>
+                      <div className="flex-1">
+                        <p className="text-sm font-semibold text-red-800 mb-1">
+                          {errorType === "order" && "Order Creation Failed"}
+                          {errorType === "verify" && "Payment Verification Issue"}
+                          {errorType === "init" && "Payment Gateway Error"}
+                          {errorType === "method" && "No Payment Method Selected"}
+                        </p>
+                        <p className="text-sm text-red-700">{paymentError}</p>
+                      </div>
+                      <button
+                        onClick={clearError}
+                        className="flex-shrink-0 text-red-400 hover:text-red-600"
+                        aria-label="Dismiss error"
+                      >
+                        <span className="material-symbols-outlined text-lg">close</span>
+                      </button>
+                    </div>
+                    {errorType !== "method" && (
+                      <div className="mt-3 flex gap-3 pl-8">
+                        <button
+                          onClick={() => { clearError(); handlePlaceService(); }}
+                          className="text-sm font-bold text-red-700 hover:text-red-900 underline underline-offset-2"
+                        >
+                          Retry Payment
+                        </button>
+                        <span className="text-red-300">|</span>
+                        <button
+                          onClick={() => { setSelectedMethod(null); clearError(); }}
+                          className="text-sm font-bold text-red-700 hover:text-red-900 underline underline-offset-2"
+                        >
+                          Change Method
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 <button
                   onClick={handlePlaceService}
                   disabled={loading || !selectedMethod}
                   className="w-full mt-8 bg-gradient-to-r from-blue-600 to-emerald-500 hover:brightness-105 text-white font-black py-4 rounded-xl shadow-lg shadow-blue-600/20 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <span className="material-symbols-outlined">shopping_bag</span>
-                  <span>{loading ? "Processing..." : "Place Your Service"}</span>
-                  <span className="material-symbols-outlined transition-transform group-hover:translate-x-1">
-                    arrow_forward
-                  </span>
+                  {loading ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                      </svg>
+                      <span>Processing Payment…</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="material-symbols-outlined">shopping_bag</span>
+                      <span>Place Your Service</span>
+                      <span className="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+                    </>
+                  )}
                 </button>
               </section>
             </div>

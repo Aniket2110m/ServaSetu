@@ -12,6 +12,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "ServaSetu | Professional Home Services, Simplified",
   description: "Experience premium home maintenance with our certified experts. From plumbing to full home AMC plans, we ensure your peace of mind.",
+  metadataBase: new URL("https://servasetu.com"),
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: '/logo.png',
     shortcut: '/logo.png',

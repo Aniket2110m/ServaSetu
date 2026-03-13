@@ -3,14 +3,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function BookingPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeQuickFilter, setActiveQuickFilter] = useState("all");
+  const [highlightedCategory, setHighlightedCategory] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const categoryRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
@@ -113,6 +117,102 @@ export default function BookingPage() {
       ],
     },
   ];
+
+  const quickFilters = [
+    { id: "all", label: "All" },
+    ...categories.map((category) => ({
+      id: category.id,
+      label: category.title,
+    })),
+    { id: "urgent", label: "Urgent" },
+  ];
+
+  const normalizedSearch = searchQuery.trim().toLowerCase();
+
+  const categoryMatchesQuickFilter = (category: (typeof categories)[number]) => {
+    if (activeQuickFilter === "all") return true;
+    if (activeQuickFilter === category.id) return true;
+    if (activeQuickFilter === "urgent") {
+      return ["home-repair", "safety", "cleaning"].includes(category.id);
+    }
+
+    return (
+      category.id.includes(activeQuickFilter) ||
+      category.title.toLowerCase().includes(activeQuickFilter) ||
+      category.subcategories.some(
+        (sub) =>
+          sub.id.includes(activeQuickFilter) ||
+          sub.name.toLowerCase().includes(activeQuickFilter)
+      )
+    );
+  };
+
+  const filteredCategories = categories
+    .map((category) => {
+      const filteredSubcategories = category.subcategories.filter(
+        (sub) =>
+          normalizedSearch === "" ||
+          sub.id.includes(normalizedSearch) ||
+          sub.name.toLowerCase().includes(normalizedSearch)
+      );
+
+      return {
+        ...category,
+        subcategories: filteredSubcategories,
+      };
+    })
+    .filter(
+      (category) =>
+        categoryMatchesQuickFilter(category) &&
+        (normalizedSearch === "" ||
+          category.title.toLowerCase().includes(normalizedSearch) ||
+          category.subcategories.length > 0)
+    );
+
+  // Auto-expand and highlight category from query params
+  useEffect(() => {
+    const categoryParam = searchParams.get("category");
+    const serviceParam = searchParams.get("service");
+    let targetCategoryId: string | null = null;
+
+    if (categoryParam && categories.some((category) => category.id === categoryParam)) {
+      targetCategoryId = categoryParam;
+      setActiveQuickFilter(categoryParam);
+    }
+
+    if (serviceParam) {
+      setSearchQuery(serviceParam);
+      const normalizedService = serviceParam.toLowerCase().trim();
+      const matchedCategory = categories.find(
+        (category) =>
+          category.id === normalizedService ||
+          category.title.toLowerCase().includes(normalizedService) ||
+          category.subcategories.some(
+            (sub) =>
+              sub.id === normalizedService ||
+              sub.name.toLowerCase().includes(normalizedService)
+          )
+      );
+
+      if (matchedCategory) {
+        targetCategoryId = matchedCategory.id;
+      }
+    }
+
+    if (targetCategoryId) {
+      setExpandedCategory(targetCategoryId);
+      setHighlightedCategory(targetCategoryId);
+
+      setTimeout(() => {
+        categoryRefs.current[targetCategoryId!]?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }, 150);
+
+      setTimeout(() => setHighlightedCategory(null), 2200);
+    }
+  }, [searchParams]);
 
   // Save selected services to localStorage whenever they change
   useEffect(() => {
@@ -241,15 +341,103 @@ export default function BookingPage() {
               </p>
             </div>
 
+            {/* Search + Filter Controls */}
+            <div className="space-y-4">
+              <div className="relative w-full max-w-3xl">
+                <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                  search
+                </span>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="Search services (e.g., plumbing, AC, deep cleaning)"
+                  className="w-full rounded-xl border border-slate-200 bg-white pl-12 pr-12 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600/40 focus:border-blue-600 transition-all"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+                    aria-label="Clear search"
+                  >
+                    <span className="material-symbols-outlined">close</span>
+                  </button>
+                )}
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {quickFilters.map((filter) => (
+                  <button
+                    key={filter.id}
+                    type="button"
+                    onClick={() => setActiveQuickFilter(filter.id)}
+                    className={`px-4 py-2 rounded-full text-sm font-semibold transition-all border ${
+                      activeQuickFilter === filter.id
+                        ? "bg-[#1B5DA5] text-white border-[#1B5DA5]"
+                        : "bg-white text-slate-700 border-slate-200 hover:border-blue-300 hover:text-[#1B5DA5]"
+                    }`}
+                  >
+                    {filter.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Persistent Selection Summary */}
+            <div className="rounded-2xl border border-blue-100 bg-blue-50/60 p-4 md:p-5">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                  <p className="text-sm font-bold text-[#1B5DA5] uppercase tracking-wide">Selected Services</p>
+                  {selectedServices.length > 0 ? (
+                    <p className="text-slate-700 text-sm mt-1">
+                      {selectedServices.length} selected • Total ₹{getTotalPrice().toFixed(0)}
+                    </p>
+                  ) : (
+                    <p className="text-slate-500 text-sm mt-1">
+                      No service selected yet. Pick services below to continue.
+                    </p>
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  disabled={selectedServices.length === 0}
+                  onClick={handleProceedToCheckout}
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#1B5DA5] text-white font-bold hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <span className="material-symbols-outlined text-base">arrow_forward</span>
+                  Continue to Schedule
+                </button>
+              </div>
+
+              {selectedServices.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {selectedServices.map((serviceId) => (
+                    <span
+                      key={serviceId}
+                      className="inline-flex items-center gap-1 bg-white border border-blue-100 text-slate-700 px-3 py-1.5 rounded-full text-xs font-semibold"
+                    >
+                      {getDisplayName(serviceId)}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {/* Categories Accordion */}
             <div className="space-y-4 pb-8">
-              {categories.map((category) => (
+              {filteredCategories.map((category) => (
                 <div
                   key={category.id}
                   ref={(el) => {
                     categoryRefs.current[category.id] = el;
                   }}
-                  className="border border-slate-200 rounded-2xl overflow-hidden bg-white hover:shadow-md transition-all"
+                  className={`border rounded-2xl overflow-hidden bg-white hover:shadow-md transition-all ${
+                    highlightedCategory === category.id
+                      ? "border-blue-400 ring-2 ring-blue-200 shadow-lg shadow-blue-100"
+                      : "border-slate-200"
+                  }`}
                 >
                   {/* Category Header */}
                   <button
@@ -318,6 +506,13 @@ export default function BookingPage() {
                   )}
                 </div>
               ))}
+
+              {filteredCategories.length === 0 && (
+                <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
+                  <p className="text-slate-600 font-semibold mb-1">No matching services found</p>
+                  <p className="text-sm text-slate-500">Try a different search term or switch quick filters.</p>
+                </div>
+              )}
             </div>
           </div>
         </div>

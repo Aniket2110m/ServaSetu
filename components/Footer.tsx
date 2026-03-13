@@ -4,8 +4,8 @@ export default function Footer() {
   return (
     <footer className="bg-gradient-to-r from-blue-600 to-emerald-500 text-white py-12">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="grid md:grid-cols-4 gap-12 mb-12 items-start">
-          <div className="col-span-1 md:col-span-1 flex flex-col gap-6">
+        <div className="grid md:grid-cols-5 gap-12 mb-12 items-start">
+          <div className="col-span-1 md:col-span-2 flex flex-col gap-6">
             <div className="flex items-center gap-2">
               <div className="relative w-10 h-10 rounded-3xl overflow-hidden">
                 <Image
@@ -105,7 +105,7 @@ Trusted professionals. Structured service. Assured quality
                   className="text-white/80 hover:text-white hover:underline transition-all"
                   href="/community"
                 >
-                  Privacy Policy
+                  Community
                 </a>
               </li>
               <li>
@@ -113,7 +113,7 @@ Trusted professionals. Structured service. Assured quality
                   className="text-white/80 hover:text-white hover:underline transition-all"
                   href="/auth"
                 >
-                  Terms of Use
+                  Login / Sign Up
                 </a>
               </li>
               <li>
@@ -121,7 +121,7 @@ Trusted professionals. Structured service. Assured quality
                   className="text-white/80 hover:text-white hover:underline transition-all"
                   href="/booking"
                 >
-                  Refund and Cancellation Policy
+                  Book a Service
                 </a>
               </li>
             </ul>
@@ -174,13 +174,13 @@ Trusted professionals. Structured service. Assured quality
             <p className="text-sm mb-6 text-white/80 text-justify-safe">
               Let’s simplify your home maintenance — contact ServaSetu today !! 
             </p>
-            <div className="flex flex-col gap-3">
+            <div className="flex items-stretch gap-0 rounded-xl overflow-hidden border border-white/30 bg-white/20 backdrop-blur-sm">
               <input
-                className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-white focus:border-white text-white placeholder:text-white/60"
+                className="flex-1 bg-transparent px-4 py-3 text-sm text-white placeholder:text-white/60 focus:outline-none"
                 placeholder="Your email address"
                 type="email"
               />
-              <button className="bg-white text-blue-600 px-4 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-white/90 transition-all">
+              <button className="bg-white text-blue-600 px-4 py-3 font-bold flex items-center justify-center gap-2 hover:bg-white/90 transition-all">
                 Send{" "}
                 <span className="material-symbols-outlined text-sm">send</span>
               </button>

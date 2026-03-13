@@ -21,7 +21,7 @@ export default function AuthButton() {
     <div className="fixed bottom-6 right-4 z-40">
       <Link
         href="/auth"
-        className="inline-flex items-center rounded-full bg-[#3d4f1f]/95 backdrop-blur-md border border-[#556B2F]/40 px-7 py-2.5 text-white font-bold text-base hover:brightness-110 transition-all shadow-lg hover:shadow-xl"
+        className="inline-flex items-center rounded-full bg-[#1B5DA5] px-7 py-2.5 text-white font-bold text-base hover:brightness-110 transition-all shadow-lg hover:shadow-xl"
       >
         Login / Signup
       </Link>

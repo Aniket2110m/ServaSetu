@@ -52,7 +52,7 @@ Backend API for ServaSetu - A comprehensive home services platform built with No
    JWT_EXPIRE=7d
    RAZORPAY_KEY_ID=your_razorpay_key_id
    RAZORPAY_KEY_SECRET=your_razorpay_key_secret
-   FRONTEND_URL=http://localhost:3000
+   FRONTEND_URLS=https://servasetu.com,https://www.servasetu.com
    ```
 
 3. **Build the project**:
@@ -156,7 +156,7 @@ backend/
 | `JWT_EXPIRE` | JWT expiration time | 7d |
 | `RAZORPAY_KEY_ID` | Razorpay key ID | - |
 | `RAZORPAY_KEY_SECRET` | Razorpay key secret | - |
-| `FRONTEND_URL` | Frontend URL for CORS | http://localhost:3000 |
+| `FRONTEND_URLS` | Comma-separated frontend origins for CORS | https://servasetu.com,https://www.servasetu.com |
 
 ## API Response Format
 
