@@ -79,7 +79,7 @@ export default function ConfirmationPage() {
     }
 
     setIsLoaded(true);
-  }, [];
+  }, []);
 
   // Calculate totals
   const getSubtotal = () => {
