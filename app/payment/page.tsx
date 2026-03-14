@@ -349,7 +349,7 @@ export default function PaymentPage() {
 
                 {/* Inline error card */}
                 {paymentError && (
-                  <div className="mt-6 rounded-xl border border-red-200 bg-red-50 p-4">
+                  <div role="alert" aria-live="assertive" className="mt-6 rounded-xl border border-red-200 bg-red-50 p-4">
                     <div className="flex items-start gap-3">
                       <span className="material-symbols-outlined text-red-500 flex-shrink-0 mt-0.5">error</span>
                       <div className="flex-1">

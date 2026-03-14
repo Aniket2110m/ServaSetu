@@ -211,6 +211,8 @@ export default function AuthPage() {
 
           {authFeedback.type !== "idle" && (
             <div
+              role="alert"
+              aria-live="polite"
               className={`mb-4 rounded-xl px-4 py-3 text-sm font-medium flex items-center gap-2 ${
                 authFeedback.type === "error"
                   ? "bg-red-50 text-red-700 border border-red-200"
@@ -313,13 +315,14 @@ export default function AuthPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, password: e.target.value })
                   }
+                  aria-describedby="pwd-reqs"
                   className="w-full pl-12 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#1F4E8C] focus:border-transparent transition-all"
                   placeholder="••••••••"
                   required
                 />
               </div>
               {!isLogin && (
-                <div className="mt-2 space-y-1 text-xs">
+                <div id="pwd-reqs" className="mt-2 space-y-1 text-xs">
                   <p className="text-slate-500 font-semibold">Password should include:</p>
                   <div className={`flex items-center gap-1 ${passwordChecks.minLength ? "text-emerald-600" : "text-slate-500"}`}>
                     <span className="material-symbols-outlined text-sm">{passwordChecks.minLength ? "check_circle" : "radio_button_unchecked"}</span>

@@ -288,7 +288,7 @@ function BookingPageContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col overflow-x-hidden bg-gradient-to-b from-white via-[#F5F7FA] to-white">
+    <div className="min-h-screen flex flex-col overflow-x-hidden bg-gradient-to-br from-[#FF9933]/60 via-white/45 to-[#138808]/60">
       {!isAuthenticated && <></>}
       <Navbar />
       {/* Main Content */}
@@ -508,7 +508,7 @@ function BookingPageContent() {
               ))}
 
               {filteredCategories.length === 0 && (
-                <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
+                <div role="status" aria-live="polite" className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
                   <p className="text-slate-600 font-semibold mb-1">No matching services found</p>
                   <p className="text-sm text-slate-500">Try a different search term or switch quick filters.</p>
                 </div>
@@ -555,7 +555,7 @@ export default function BookingPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-gradient-to-b from-white via-[#F5F7FA] to-white" />
+        <div className="min-h-screen bg-gradient-to-br from-[#FF9933]/60 via-white/45 to-[#138808]/60" />
       }
     >
       <BookingPageContent />

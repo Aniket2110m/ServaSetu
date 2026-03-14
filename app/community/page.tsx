@@ -2,17 +2,23 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function CommunityPage() {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [visibleCount, setVisibleCount] = useState(3);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [reviewSubmitted, setReviewSubmitted] = useState(false);
+  const [reviewForm, setReviewForm] = useState({ name: "", service: "", rating: 5, review: "" });
 
-  const stories = [
+  const allStories = [
     {
       id: 1,
       name: "Priya Sharma",
       location: "Mumbai, Maharashtra",
       service: "Complete Home Maintenance",
+      category: "electrical",
       image: "PS",
       rating: 5,
       review:
@@ -24,6 +30,7 @@ export default function CommunityPage() {
       name: "Rajesh Kumar",
       location: "Bangalore, Karnataka",
       service: "AC Repair & Maintenance",
+      category: "ac-repair",
       image: "RK",
       rating: 5,
       review:
@@ -35,13 +42,69 @@ export default function CommunityPage() {
       name: "Ananya Patel",
       location: "Delhi NCR",
       service: "Plumbing Emergency",
+      category: "plumbing",
       image: "AP",
       rating: 5,
       review:
         "Had a major pipe leak at 11 PM. Their emergency service responded within 45 minutes! The technician was skilled and fixed everything perfectly. True professionals!",
       date: "3 weeks ago",
     },
+    {
+      id: 4,
+      name: "Suresh Nair",
+      location: "Chennai, Tamil Nadu",
+      service: "Electrical Panel Upgrade",
+      category: "electrical",
+      image: "SN",
+      rating: 5,
+      review:
+        "Our old fuse box was a safety hazard. The electrician diagnosed the issue immediately and upgraded our entire panel the same day. Transparent pricing, zero surprises.",
+      date: "2 months ago",
+    },
+    {
+      id: 5,
+      name: "Meena Verma",
+      location: "Hyderabad, Telangana",
+      service: "Deep Home Cleaning",
+      category: "cleaning",
+      image: "MV",
+      rating: 5,
+      review:
+        "Booked a post-renovation deep clean and was blown away. Every corner was spotless within 4 hours. The team was polite, efficient, and used eco-friendly products.",
+      date: "5 weeks ago",
+    },
+    {
+      id: 6,
+      name: "Arun Joshi",
+      location: "Pune, Maharashtra",
+      service: "Bathroom Pipe Repair",
+      category: "plumbing",
+      image: "AJ",
+      rating: 4,
+      review:
+        "Excellent plumber arrived within the promised window and fixed a stubborn leak that two others couldn't solve. Reasonable pricing and very tidy work.",
+      date: "3 months ago",
+    },
   ];
+
+  const filtered = activeCategory === "all" ? allStories : allStories.filter((s) => s.category === activeCategory);
+  const visible = filtered.slice(0, visibleCount);
+  const hasMore = visibleCount < filtered.length;
+
+  function handleCategoryChange(cat: string) {
+    setActiveCategory(cat);
+    setVisibleCount(3);
+  }
+
+  function handleReviewSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setReviewSubmitted(true);
+    setTimeout(() => {
+      setShowReviewForm(false);
+      setReviewSubmitted(false);
+      setReviewForm({ name: "", service: "", rating: 5, review: "" });
+    }, 2500);
+  }
 
   return (
     <div className="font-display bg-[#F8FAFC] text-slate-900 overflow-x-hidden">
@@ -136,7 +199,7 @@ export default function CommunityPage() {
               (category) => (
                 <button
                   key={category}
-                  onClick={() => setActiveCategory(category)}
+                  onClick={() => handleCategoryChange(category)}
                   className={`px-6 py-2.5 rounded-full font-semibold text-sm capitalize transition-all ${
                     activeCategory === category
                       ? "bg-brand-gradient text-white shadow-lg"
@@ -151,7 +214,7 @@ export default function CommunityPage() {
 
           {/* Stories Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {stories.map((story) => (
+            {visible.map((story) => (
               <div
                 key={story.id}
                 className="bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:shadow-2xl hover:-translate-y-2 transition-all"
@@ -195,10 +258,19 @@ export default function CommunityPage() {
           </div>
 
           <div className="text-center mt-12">
-            <button className="bg-[#1F4E8C] text-white px-8 py-4 rounded-full font-bold hover:shadow-xl hover:brightness-110 transition-all inline-flex items-center gap-2">
-              Load More Stories
-              <span className="material-symbols-outlined">expand_more</span>
-            </button>
+            {hasMore ? (
+              <button
+                onClick={() => setVisibleCount((c) => c + 3)}
+                className="bg-[#1F4E8C] text-white px-8 py-4 rounded-full font-bold hover:shadow-xl hover:brightness-110 transition-all inline-flex items-center gap-2"
+              >
+                Load More Stories
+                <span className="material-symbols-outlined">expand_more</span>
+              </button>
+            ) : (
+              <p className="text-slate-500 text-sm">
+                All {filtered.length} {activeCategory !== "all" ? `${activeCategory.replace("-", " ")} ` : ""}stories shown.
+              </p>
+            )}
           </div>
         </div>
       </section>
@@ -267,14 +339,19 @@ export default function CommunityPage() {
                 story and inspire others in the community.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-white text-[#1F4E8C] px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all inline-flex items-center justify-center gap-2">
+                <button
+                  onClick={() => setShowReviewForm(true)}
+                  className="bg-white text-[#1F4E8C] px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all inline-flex items-center justify-center gap-2"
+                >
                   <span className="material-symbols-outlined">edit_note</span>
                   Write Your Review
                 </button>
-                <button className="bg-[#FF9933] text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:brightness-110 transition-all inline-flex items-center justify-center gap-2">
-                  <span className="material-symbols-outlined">videocam</span>
-                  Submit Video Testimonial
-                </button>
+                <Link href="/auth">
+                  <button className="bg-[#FF9933] text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:brightness-110 transition-all inline-flex items-center justify-center gap-2">
+                    <span className="material-symbols-outlined">videocam</span>
+                    Submit Video Testimonial
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -333,6 +410,90 @@ export default function CommunityPage() {
           </div>
         </div>
       </section>
+
+      {/* Review Form Modal */}
+      {showReviewForm && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg p-8 relative">
+            <button
+              onClick={() => setShowReviewForm(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors"
+            >
+              <span className="material-symbols-outlined text-3xl">close</span>
+            </button>
+            {reviewSubmitted ? (
+              <div className="text-center py-8">
+                <span
+                  className="material-symbols-outlined text-6xl text-[#1FA37A] mb-4 block"
+                  style={{ fontVariationSettings: "'FILL' 1" }}
+                >
+                  check_circle
+                </span>
+                <h3 className="text-2xl font-bold text-[#1B2430] mb-2">Thank you!</h3>
+                <p className="text-slate-600">Your review has been submitted for moderation.</p>
+              </div>
+            ) : (
+              <>
+                <h3 className="text-2xl font-bold text-[#1F4E8C] mb-6">Write Your Review</h3>
+                <form onSubmit={handleReviewSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-1">Your Name</label>
+                    <input
+                      required
+                      value={reviewForm.name}
+                      onChange={(e) => setReviewForm((f) => ({ ...f, name: e.target.value }))}
+                      placeholder="e.g. Priya Sharma"
+                      className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#1FA37A]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-1">Service Used</label>
+                    <input
+                      required
+                      value={reviewForm.service}
+                      onChange={(e) => setReviewForm((f) => ({ ...f, service: e.target.value }))}
+                      placeholder="e.g. AC Repair, Plumbing"
+                      className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#1FA37A]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-1">Rating</label>
+                    <div className="flex gap-2">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <button
+                          type="button"
+                          key={star}
+                          onClick={() => setReviewForm((f) => ({ ...f, rating: star }))}
+                          className={`text-3xl transition-colors ${reviewForm.rating >= star ? "text-[#FF9933]" : "text-slate-300"}`}
+                        >
+                          ★
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-1">Your Experience</label>
+                    <textarea
+                      required
+                      rows={4}
+                      value={reviewForm.review}
+                      onChange={(e) => setReviewForm((f) => ({ ...f, review: e.target.value }))}
+                      placeholder="Tell us about your experience with ServaSetu..."
+                      className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#1FA37A] resize-none"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full bg-[#1FA37A] text-white py-3.5 rounded-xl font-bold hover:brightness-110 transition-all"
+                  >
+                    Submit Review
+                  </button>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>

@@ -159,6 +159,12 @@ export default function AddressPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Form Section */}
             <div className="lg:col-span-2 space-y-6">
+              {/* Screen-reader error announcement — always in DOM, updated on submit */}
+              <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+                {Object.keys(errors).length > 0
+                  ? `${Object.keys(errors).length} error${Object.keys(errors).length > 1 ? "s" : ""}: ${Object.values(errors).filter(Boolean).join(". ")}.`
+                  : ""}
+              </div>
               <section className="bg-white rounded-xl p-6 shadow-sm border border-slate-100">
                 <h2 className="text-xl font-bold text-slate-900 mb-6">
                   Personal Information

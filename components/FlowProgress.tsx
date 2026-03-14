@@ -15,14 +15,21 @@ export default function FlowProgress({ title, currentStep }: FlowProgressProps) 
   const progressPercent = (currentStep / totalSteps) * 100;
 
   return (
-    <div className="px-6 md:px-8 py-12 mb-8 bg-gradient-to-r from-blue-600 to-emerald-500 rounded-3xl shadow-xl">
+    <nav aria-label="Booking progress" className="px-6 md:px-8 py-12 mb-8 bg-gradient-to-r from-blue-600 to-emerald-500 rounded-3xl shadow-xl">
       <div className="flex flex-col gap-6">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-bold text-white">{title}</h3>
           <span className="text-sm font-bold text-white">{Math.round(progressPercent)}% Complete</span>
         </div>
 
-        <div className="relative h-2 w-full rounded-full bg-white/30">
+        <div
+          className="relative h-2 w-full rounded-full bg-white/30"
+          role="progressbar"
+          aria-valuenow={Math.round(progressPercent)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label={`Step ${currentStep} of ${totalSteps}: ${steps[currentStep - 1]}`}
+        >
           <div className="absolute h-full rounded-full bg-white" style={{ width: `${progressPercent}%` }}></div>
           <div
             className="absolute top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-2 border-white bg-emerald-400 shadow-md"
@@ -39,6 +46,7 @@ export default function FlowProgress({ title, currentStep }: FlowProgressProps) 
             return (
               <div
                 key={step}
+                aria-current={isCurrent ? "step" : undefined}
                 className={`${isCurrent ? "text-white" : "text-white/60"} ${
                   isLast ? "text-right" : "px-4 first:px-0"
                 }`}
@@ -49,6 +57,6 @@ export default function FlowProgress({ title, currentStep }: FlowProgressProps) 
           })}
         </div>
       </div>
-    </div>
+    </nav>
   );
 }
