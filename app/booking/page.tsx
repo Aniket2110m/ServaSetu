@@ -288,17 +288,23 @@ function BookingPageContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col overflow-x-hidden bg-gradient-to-br from-[#FF9933]/60 via-white/45 to-[#138808]/60">
+    <div className="relative min-h-screen flex flex-col overflow-x-hidden bg-gradient-to-br from-[#FF9933]/60 via-white/45 to-[#138808]/60">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-24 -left-20 size-72 rounded-full bg-[#FF9933]/25 blur-3xl motion-safe:animate-pulse" />
+        <div className="absolute top-1/3 -right-24 size-80 rounded-full bg-emerald-400/20 blur-3xl motion-safe:animate-pulse" />
+        <div className="absolute bottom-8 left-1/3 size-64 rounded-full bg-blue-500/15 blur-3xl motion-safe:animate-pulse" />
+      </div>
       {!isAuthenticated && <></>}
       <Navbar />
       {/* Main Content */}
 
       {/* Main Content */}
-      <main className="flex w-full flex-col px-6 py-12 md:px-20 flex-grow">
+      <main className="relative z-10 flex w-full flex-col px-6 py-12 md:px-20 flex-grow">
         {/* Gradient Section */}
-        <div className="px-6 md:px-8 py-12 mb-8 bg-gradient-to-r from-blue-600 to-emerald-500 rounded-3xl shadow-xl">
+        <div className="relative overflow-hidden px-6 md:px-8 py-12 mb-8 bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-500 rounded-3xl shadow-2xl shadow-blue-900/20 border border-white/20">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.35),transparent_40%)]" />
           {/* Progress Indicator */}
-          <div className="flex flex-col gap-6">
+          <div className="relative flex flex-col gap-6">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold text-white">
               Service Selection
@@ -324,14 +330,14 @@ function BookingPageContent() {
 
         {/* Services Section - Full Width */}
         <div className="w-full">
-          <div className="flex flex-col gap-8 bg-white rounded-2xl p-6 md:p-8 lg:p-12 shadow-md border border-slate-200">
+          <div className="flex flex-col gap-8 bg-white/85 backdrop-blur-md rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl shadow-slate-900/10 border border-white/70">
             <div className="mb-2">
               <div className="flex items-center gap-3 mb-3">
                 <div className="relative size-10 rounded-full overflow-hidden border border-slate-200 bg-white">
                   <Image src="/logo.png" alt="ServaSetu Logo" fill className="object-contain" />
                 </div>
-                <h1 className="text-4xl font-bold tracking-tight text-[#0A192F]">
-                  Select Our Services : 
+                <h1 className="text-4xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#0A192F] via-[#1B5DA5] to-[#1FA37A]">
+                  Select Your Services
                 </h1>
               </div>
               <p className="text-slate-500 leading-relaxed max-w-2xl text-justify-safe">
@@ -352,7 +358,7 @@ function BookingPageContent() {
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder="Search services (e.g., plumbing, AC, deep cleaning)"
-                  className="w-full rounded-xl border border-slate-200 bg-white pl-12 pr-12 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600/40 focus:border-blue-600 transition-all"
+                  className="w-full rounded-2xl border border-slate-200 bg-white/90 pl-12 pr-12 py-3.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600/40 focus:border-blue-600 transition-all shadow-sm hover:shadow-md"
                 />
                 {searchQuery && (
                   <button
@@ -372,10 +378,10 @@ function BookingPageContent() {
                     key={filter.id}
                     type="button"
                     onClick={() => setActiveQuickFilter(filter.id)}
-                    className={`px-4 py-2 rounded-full text-sm font-semibold transition-all border ${
+                    className={`px-4 py-2 rounded-full text-sm font-semibold transition-all border hover:-translate-y-0.5 ${
                       activeQuickFilter === filter.id
-                        ? "bg-[#1B5DA5] text-white border-[#1B5DA5]"
-                        : "bg-white text-slate-700 border-slate-200 hover:border-blue-300 hover:text-[#1B5DA5]"
+                        ? "bg-gradient-to-r from-[#1B5DA5] to-[#1FA37A] text-white border-transparent shadow-lg shadow-blue-200"
+                        : "bg-white text-slate-700 border-slate-200 hover:border-blue-300 hover:text-[#1B5DA5] hover:shadow-md"
                     }`}
                   >
                     {filter.label}
@@ -385,7 +391,7 @@ function BookingPageContent() {
             </div>
 
             {/* Persistent Selection Summary */}
-            <div className="rounded-2xl border border-blue-100 bg-blue-50/60 p-4 md:p-5">
+            <div className="rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50/80 via-white to-emerald-50/70 p-4 md:p-5 shadow-sm">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
                   <p className="text-sm font-bold text-[#1B5DA5] uppercase tracking-wide">Selected Services</p>
@@ -404,7 +410,7 @@ function BookingPageContent() {
                   type="button"
                   disabled={selectedServices.length === 0}
                   onClick={handleProceedToCheckout}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#1B5DA5] text-white font-bold hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#1B5DA5] to-[#1FA37A] text-white font-bold hover:brightness-110 hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-200"
                 >
                   <span className="material-symbols-outlined text-base">arrow_forward</span>
                   Continue to Schedule
@@ -416,7 +422,7 @@ function BookingPageContent() {
                   {selectedServices.map((serviceId) => (
                     <span
                       key={serviceId}
-                      className="inline-flex items-center gap-1 bg-white border border-blue-100 text-slate-700 px-3 py-1.5 rounded-full text-xs font-semibold"
+                      className="inline-flex items-center gap-1 bg-white border border-blue-100 text-slate-700 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm hover:shadow transition-all"
                     >
                       {getDisplayName(serviceId)}
                     </span>
@@ -433,7 +439,7 @@ function BookingPageContent() {
                   ref={(el) => {
                     categoryRefs.current[category.id] = el;
                   }}
-                  className={`border rounded-2xl overflow-hidden bg-white hover:shadow-md transition-all ${
+                  className={`border rounded-2xl overflow-hidden bg-white/95 backdrop-blur-sm hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 ${
                     highlightedCategory === category.id
                       ? "border-blue-400 ring-2 ring-blue-200 shadow-lg shadow-blue-100"
                       : "border-slate-200"
@@ -446,13 +452,13 @@ function BookingPageContent() {
                         expandedCategory === category.id ? null : category.id
                       )
                     }
-                    className="w-full flex items-center justify-between p-6 hover:bg-slate-50 transition-colors"
+                    className="w-full flex items-center justify-between p-6 hover:bg-gradient-to-r hover:from-blue-50/70 hover:to-emerald-50/50 transition-colors"
                   >
                     <div className="flex items-center gap-4">
                       <div
-                        className={`flex h-12 w-12 items-center justify-center rounded-full transition-colors ${
+                        className={`flex h-12 w-12 items-center justify-center rounded-full transition-all duration-300 ${
                           expandedCategory === category.id
-                            ? "bg-gradient-to-r from-blue-600 to-emerald-500 text-white"
+                            ? "bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-500 text-white shadow-lg"
                             : "bg-slate-100 text-slate-400"
                         }`}
                       >
@@ -470,7 +476,7 @@ function BookingPageContent() {
                       </div>
                     </div>
                     <span
-                      className={`material-symbols-outlined text-slate-400 transition-transform ${
+                      className={`material-symbols-outlined text-slate-400 transition-transform duration-300 ${
                         expandedCategory === category.id ? "rotate-180" : ""
                       }`}
                     >
@@ -480,11 +486,11 @@ function BookingPageContent() {
 
                   {/* Subcategories List */}
                   {expandedCategory === category.id && (
-                    <div className="border-t-2 border-blue-100 bg-gradient-to-br from-slate-50 via-blue-50/30 to-emerald-50/30 p-6 space-y-3">
+                    <div className="border-t-2 border-blue-100 bg-gradient-to-br from-slate-50 via-blue-50/40 to-emerald-50/40 p-6 space-y-3">
                       {category.subcategories.map((sub) => (
                         <label
                           key={sub.id}
-                          className="flex items-center gap-4 cursor-pointer p-4 rounded-xl bg-white hover:bg-gradient-to-r hover:from-blue-50 hover:to-emerald-50 transition-all duration-200 border border-slate-200 hover:border-blue-300 hover:shadow-md group"
+                          className="flex items-center gap-4 cursor-pointer p-4 rounded-xl bg-white hover:bg-gradient-to-r hover:from-blue-50 hover:to-emerald-50 transition-all duration-300 border border-slate-200 hover:border-blue-300 hover:shadow-lg hover:-translate-y-0.5 group"
                         >
                           <input
                             type="checkbox"
@@ -497,7 +503,7 @@ function BookingPageContent() {
                               {sub.name}
                             </p>
                           </div>
-                          <span className="text-base font-black text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg group-hover:bg-blue-100 transition-colors">
+                          <span className="text-base font-black text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg group-hover:bg-blue-100 transition-all group-hover:scale-105">
                             ₹{sub.price.toFixed(0)}
                           </span>
                         </label>
@@ -519,19 +525,19 @@ function BookingPageContent() {
 
         {/* Floating Cart Button */}
         {selectedServices.length > 0 && (
-          <div className="fixed bottom-6 right-6 z-50">
+          <div className="fixed bottom-6 right-6 z-50 motion-safe:animate-bounce">
             <button 
               onClick={handleProceedToCheckout}
               className="relative group cursor-pointer"
             >
               {/* Cart Circle */}
-              <div className="size-16 rounded-full bg-gradient-to-r from-blue-600 to-emerald-500 flex items-center justify-center text-white shadow-2xl hover:shadow-blue-500/50 hover:scale-110 transition-all duration-300">
+              <div className="size-16 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-500 flex items-center justify-center text-white shadow-2xl hover:shadow-blue-500/50 hover:scale-110 transition-all duration-300 ring-4 ring-white/70">
                 <span className="material-symbols-outlined text-3xl">
                   shopping_cart
                 </span>
               </div>
               {/* Badge with count */}
-              <div className="absolute -top-2 -right-2 size-8 rounded-full bg-red-500 text-white flex items-center justify-center text-xs font-black border-2 border-white shadow-lg">
+              <div className="absolute -top-2 -right-2 size-8 rounded-full bg-red-500 text-white flex items-center justify-center text-xs font-black border-2 border-white shadow-lg motion-safe:animate-pulse">
                 {selectedServices.length}
               </div>
               {/* Tooltip with total */}
