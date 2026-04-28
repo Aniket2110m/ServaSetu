@@ -73,6 +73,19 @@ npm run build
 npm start
 ```
 
+### Keep Render Warm (Optional)
+Use this script to ping a health endpoint periodically and reduce cold-start delay:
+
+1. Add to `.env`:
+   ```env
+   RENDER_KEEP_ALIVE_URL=https://your-backend.onrender.com/health
+   RENDER_KEEP_ALIVE_INTERVAL_MINUTES=10
+   ```
+2. Run:
+   ```bash
+   npm run keepalive
+   ```
+
 ## API Endpoints
 
 ### Authentication

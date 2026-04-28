@@ -6,9 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "apk:sync": "npx cap sync android",
+    "apk:open": "npx cap open android",
+    "apk:build": "npm run apk:sync && npm run apk:open"
   },
   "dependencies": {
+    "@capacitor/android": "^6.2.1",
+    "@capacitor/core": "^6.2.1",
     "date-fns": "^4.1.0",
     "next": "16.1.6",
     "react": "19.2.3",
@@ -16,6 +21,7 @@
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "@capacitor/cli": "^6.2.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

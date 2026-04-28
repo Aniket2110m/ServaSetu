@@ -1,6 +1,23 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!email.trim()) {
+      return;
+    }
+
+    const subject = encodeURIComponent("ServaSetu newsletter signup");
+    const body = encodeURIComponent(`Please subscribe this email address: ${email.trim()}`);
+    window.location.href = `mailto:servasetu@gmail.com?subject=${subject}&body=${body}`;
+  };
+
   return (
     <footer className="bg-gradient-to-r from-blue-600 to-emerald-500 text-white py-12">
       <div className="max-w-[1200px] mx-auto px-6">
@@ -174,17 +191,29 @@ Trusted professionals. Structured service. Assured quality
             <p className="text-sm mb-6 text-white/80 text-justify-safe">
               Let’s simplify your home maintenance — contact ServaSetu today !! 
             </p>
-            <div className="flex items-stretch gap-0 rounded-xl overflow-hidden border border-white/30 bg-white/20 backdrop-blur-sm">
+            <form
+              className="flex w-full max-w-sm items-stretch overflow-hidden rounded-xl border border-white/30 bg-white/20 backdrop-blur-sm"
+              onSubmit={handleSubmit}
+            >
               <input
-                className="flex-1 bg-transparent px-4 py-3 text-sm text-white placeholder:text-white/60 focus:outline-none"
+                className="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm text-white placeholder:text-white/60 focus:outline-none"
                 placeholder="Your email address"
                 type="email"
+                name="email"
+                required
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
               />
-              <button className="bg-white text-blue-600 px-4 py-3 font-bold flex items-center justify-center gap-2 hover:bg-white/90 transition-all">
-                Send{" "}
+              <button
+                className="shrink-0 whitespace-nowrap bg-white px-4 py-3 font-bold text-blue-600 flex items-center justify-center hover:bg-white/90 transition-all"
+                type="submit"
+              >
                 <span className="material-symbols-outlined text-sm">send</span>
               </button>
-            </div>
+            </form>
+            <p className="mt-3 max-w-sm text-xs leading-relaxed text-white/70 text-justify-safe">
+              Submitting opens a prefilled email to servasetu@gmail.com.
+            </p>
           </div>
         </div>
 

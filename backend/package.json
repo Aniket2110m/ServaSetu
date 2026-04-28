@@ -9,7 +9,8 @@
     "start": "node dist/server.js",
     "lint": "eslint src --ext .ts",
     "test": "jest",
-    "seed": "ts-node src/scripts/seed.ts"
+    "seed": "ts-node src/scripts/seed.ts",
+    "keepalive": "ts-node src/scripts/render-keepalive.ts"
   },
   "keywords": [
     "servasetu",
